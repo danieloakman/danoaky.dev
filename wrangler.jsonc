@@ -3,5 +3,11 @@
 	"compatibility_date": "2025-01-26",
 	"assets": {
 		"directory": "./build"
-	}
+	},
+  "routes": [
+    {
+      "pattern": "danoaky.dev",
+      "custom_domain": true
+    }
+  ]
 }
