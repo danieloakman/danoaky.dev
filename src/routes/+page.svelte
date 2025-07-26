@@ -33,7 +33,7 @@
 
 		<section class="mt-10">
 			<p class="opacity-70">
-				&copy; {new Date().getFullYear()} Mimpup - Daniel Brown. All rights reserved.
+				&copy; {new Date().getFullYear()} Daniel Brown. All rights reserved.
 			</p>
 		</section>
 	</main>
