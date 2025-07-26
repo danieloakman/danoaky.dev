@@ -1,15 +1,16 @@
 {
 	"name": "danoaky-dot-dev",
-  "main": ".svelte-kit/cloudflare/_worker.js",
+	"main": ".svelte-kit/cloudflare/_worker.js",
 	"compatibility_date": "2025-01-26",
+	"compatibility_flags": ["nodejs_compat"],
 	"assets": {
-    "binding": "ASSETS",
+		"binding": "ASSETS",
 		"directory": ".svelte-kit/cloudflare"
 	},
-  "routes": [
-    {
-      "pattern": "danoaky.dev",
-      "custom_domain": true
-    }
-  ]
+	"routes": [
+		{
+			"pattern": "danoaky.dev",
+			"custom_domain": true
+		}
+	]
 }
