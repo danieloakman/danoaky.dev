@@ -1,4 +1,4 @@
-import { pick, set } from 'moderndash';
+import { pick } from 'moderndash';
 
 import type { Education, Experience, Project, Skill } from '$lib/types';
 import { calcYears } from '$lib/utils/dates';
