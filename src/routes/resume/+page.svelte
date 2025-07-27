@@ -79,7 +79,7 @@
 </div>
 
 <style lang="postcss">
-	@reference '../../../app.css';
+	@reference '../../app.css';
 
 	.col {
 		@apply flex flex-col gap-4;
