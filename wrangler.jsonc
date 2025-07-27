@@ -11,6 +11,10 @@
 		{
 			"pattern": "danoaky.dev",
 			"custom_domain": true
+		},
+		{
+			"pattern": "www.danoaky.dev",
+			"custom_domain": true
 		}
 	]
 }
