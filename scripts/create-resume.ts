@@ -6,10 +6,13 @@ import puppeteer from 'puppeteer';
 
 async function createResume({ output }: { output: string }) {
 	const browser = await puppeteer.launch();
-	const page = await browser.newPage();
-	await page.goto('http://localhost:5173/resume');
-	await page.pdf({ path: output, format: 'A4' });
-	await browser.close();
+	try {
+		const page = await browser.newPage();
+		await page.goto('http://localhost:5173/resume');
+		await page.pdf({ path: output, format: 'A4' });
+	} finally {
+		await browser.close();
+	}
 }
 
 if (import.meta.main) {
@@ -40,9 +43,10 @@ if (import.meta.main) {
 	);
 
 	if (cli.flags.watch) {
-		const watcher = chokidar.watch(
-			path.join(import.meta.dir, '../src/routes/resume/+page.svelte')
-		);
+		const watcher = chokidar.watch([
+			path.join(import.meta.dir, '../src/routes/resume/+page.svelte'),
+			path.join(import.meta.dir, '../src/lib/assets/content.ts')
+		]);
 		watcher.on('change', async () => {
 			await createResume({ output: cli.flags.output });
 		});
