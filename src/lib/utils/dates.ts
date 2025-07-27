@@ -1,6 +1,9 @@
-import { differenceInYears } from 'date-fns';
+import { length, range } from 'iteragain';
 
 const TODAY = new Date();
+
+const numOfYearsFrom = (start: string, stop: string) =>
+	length(range(parseInt(start), parseInt(stop) + 1)); // +1 because range is exclusive
 
 /** @param str - Format of 'YYYY-YYYY,YYYY,YYYY-' */
 export const calcYears = (str: string) => {
@@ -9,8 +12,8 @@ export const calcYears = (str: string) => {
 	for (const part of parts) {
 		if (part.includes('-')) {
 			const [start, end] = part.split('-');
-			if (start && end) total += differenceInYears(new Date(end), new Date(start));
-			else if (start) total += differenceInYears(TODAY, new Date(start));
+			if (start && end) total += numOfYearsFrom(start, end);
+			else if (start) total += numOfYearsFrom(start, TODAY.getFullYear().toString());
 		} else if (part) total++;
 	}
 	return total;
