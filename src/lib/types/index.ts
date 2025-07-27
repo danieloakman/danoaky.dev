@@ -2,9 +2,9 @@ import type { Snippet } from 'svelte';
 
 export interface Skill {
 	name: string;
-	type?: 'programming-language' | 'library' | 'framework' | 'tool' | 'platform' | 'other';
+	type: 'programming-language' | 'library' | 'framework' | 'tool' | 'platform' | 'other';
 	/** Years of experience. */
-	years?: number;
+	years: number;
 }
 
 export interface Experience {

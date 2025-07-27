@@ -7,17 +7,17 @@ export const SKILLS = {
 	JS: {
 		name: 'JavaScript (ES6+)',
 		type: 'programming-language',
-		years: calcYears('2015-')
+		years: calcYears('2018-')
 	},
 	TS: {
 		name: 'TypeScript',
 		type: 'programming-language',
-		years: calcYears('2016-')
+		years: calcYears('2019-')
 	},
 	python: {
 		name: 'Python',
 		type: 'programming-language',
-		years: calcYears('2016-')
+		years: calcYears('2021-')
 	},
 	golang: {
 		name: 'Golang',

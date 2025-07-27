@@ -1,11 +1,28 @@
 <script lang="ts">
 	import { EDUCATION, EXPERIENCE, PROJECTS, SKILLS } from '$lib/assets/content';
-	import type { Experience } from '$lib/types';
+	import type { Experience, Skill } from '$lib/types';
 	import { formatStartEndDates } from '$lib/utils/dates';
+
+	const languages: Skill[] = [];
+	for (const skill of Object.values(SKILLS)) {
+		switch (skill.type) {
+			case 'programming-language':
+				languages.push(skill);
+				break;
+			// case 'framework':
+			// 	frameworks.push(skill);
+			// 	break;
+			// case 'tool':
+			// 	tools.push(skill);
+		}
+	}
 </script>
 
-<div class="row p-10 text-surface-900 text-xs text-[10px]">
-	<div class="col flex-2">
+<div>
+
+</div>
+<main class="row p-10 text-surface-900 text-xs text-[10px]">
+	<section class="col flex-2">
 		<h1>Daniel Brown</h1>
 
 		<p>
@@ -46,15 +63,18 @@
 				</div>
 			{/each}
 		</div>
-	</div>
+	</section>
 
-	<div class="col flex-1">
+	<section class="col flex-1">
 		<ul class="flex flex-col gap-0.5 border-1 border-primary-500 p-4 card">
 			<li>
 				<a href="mailto:doakman94@gmail.com">doakman94@gmail.com</a>
 			</li>
 			<li>
 				<a href="tel:0411032732">0411032732</a>
+			</li>
+			<li>
+				<a href="https://danoaky.dev">Portfolio</a>
 			</li>
 			<li>
 				<a href="https://github.com/danieloakman">github.com/danieloakman</a>
@@ -71,12 +91,33 @@
 			<br />
 
 			<li>Wollongong, NSW</li>
-			<li>
-				<p>Working rights: Australian Citizen</p>
-			</li>
+			<li>Working rights: Australian Citizen</li>
+
+			<br />
 		</ul>
-	</div>
-</div>
+
+		<div class="flex flex-col gap-2">
+			<h2>Skills</h2>
+
+			<p>
+				<b>Strongest languages: </b>
+				{languages
+					.slice(0, 4)
+					.map(({ name, years }) => `${years} years in ${name}`)
+					.join(', ')}.
+			</p>
+
+			<p>
+				<b>Other known languages: </b>
+				{languages
+					.slice(4)
+					.sort((a, b) => b.years - a.years)
+					.map(({ name }) => name)
+					.join(', ')}.
+			</p>
+		</div>
+	</section>
+</main>
 
 <style lang="postcss">
 	@reference '../../app.css';
