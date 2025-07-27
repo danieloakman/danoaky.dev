@@ -132,7 +132,7 @@ export const SKILLS = {
 	aws: {
 		name: 'Amazon Web Services',
 		type: 'platform',
-		years: calcYears('2018-2022,2024-')
+		years: calcYears('2018-')
 	},
 	awsLambda: {
 		name: 'AWS Lambda',
@@ -230,9 +230,9 @@ export const SKILLS = {
 		years: calcYears('2023-')
 	},
 	wsl: {
-		name: 'Windows Subsystem for Linux',
+		name: 'Windows Subsystem for Linux (WSL)',
 		type: 'tool',
-		years: calcYears('2022-2023')
+		years: calcYears('2022-')
 	},
 	debian: {
 		name: 'Debian',
@@ -259,11 +259,11 @@ export const SKILLS = {
 		type: 'tool',
 		years: calcYears('2019-2023')
 	},
-	git: {
-		name: 'Git',
-		type: 'tool',
-		years: calcYears('2017-')
-	},
+	// git: {
+	// 	name: 'Git',
+	// 	type: 'tool',
+	// 	years: calcYears('2017-')
+	// },
 	AI: {
 		name: 'Artificial Intelligence (AI)',
 		type: 'tool',
@@ -577,15 +577,16 @@ export const PROJECTS: Project[] = [
 		image: null,
 		skills: selectSkills('TS', 'node', 'pnpm', 'npmPublishing', 'ciCd'),
 		url: 'https://www.npmjs.com/package/more-node-fs',
-		sourceUrl: 'https://github.com/danieloakman/more-node-fs',
+		sourceUrl: 'https://github.com/danieloakman/more-node-fs'
 	},
 	{
 		name: 'Core library for Auxilis',
-    description: 'The core library imported and used across many of Auxilis\' applications and services. I was the core maintainer of this library.',
+		description:
+			"The core library imported and used across many of Auxilis' applications and services. I was the core maintainer of this library.",
 		date: new Date('2021-03-01'),
 		madeAt: 'Auxilis',
 		image: null,
-		skills: selectSkills('TS', 'JS', 'node', 'pnpm', 'ciCd', 'aws'),
+		skills: selectSkills('TS', 'JS', 'node', 'pnpm', 'ciCd', 'aws')
 	},
 	{
 		name: 'Computer Science Degree Project',

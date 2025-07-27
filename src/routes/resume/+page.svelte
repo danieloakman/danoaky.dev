@@ -1,27 +1,35 @@
 <script lang="ts">
 	import { EDUCATION, EXPERIENCE, PROJECTS, SKILLS } from '$lib/assets/content';
-	import type { Experience, Skill } from '$lib/types';
+	import type { Skill } from '$lib/types';
 	import { formatStartEndDates } from '$lib/utils/dates';
 
-	const languages: Skill[] = [];
-	for (const skill of Object.values(SKILLS)) {
-		switch (skill.type) {
-			case 'programming-language':
-				languages.push(skill);
-				break;
-			// case 'framework':
-			// 	frameworks.push(skill);
-			// 	break;
-			// case 'tool':
-			// 	tools.push(skill);
-		}
-	}
+	const {
+		'programming-language': languages,
+		framework: frameworks,
+		library: libraries,
+		tool: tools,
+		platform: platforms
+	} = Object.values(SKILLS).reduce(
+		(acc, skill) => {
+			acc[skill.type] = [...(acc[skill.type] ?? []), skill];
+			return acc;
+		},
+		{} as Record<Skill['type'], Skill[]>
+	);
+
+	const skillByYears = (a: Skill, b: Skill) => b.years - a.years;
 </script>
 
-<div>
+{#snippet subSection({ title, content }: { title?: string; content: string })}
+	<div>
+		{#if title}
+			<b>{title}</b>
+		{/if}
+		<p class="leading-tight">{content}</p>
+	</div>
+{/snippet}
 
-</div>
-<main class="row p-10 text-surface-900 text-xs text-[10px]">
+<main class="row p-10 text-surface-900 text-xxs">
 	<section class="col flex-2">
 		<h1>Daniel Brown</h1>
 
@@ -43,14 +51,14 @@
 							{@const { start, end } = formatStartEndDates(lastRole.start, lastRole.end)}
 							<h3 class="flex gap-2 items-end text-[11px]">
 								{lastRole.title} - <b class="font-semibold">{company}</b>
-								<mark class="text-[10px] opacity-50"> {start} - {end} </mark>
+								<mark class="text-xxs opacity-50"> {start} - {end} </mark>
 							</h3>
 						{/if}
 						{#each rolesCopy as role}
 							{@const { start, end } = formatStartEndDates(role.start, role.end)}
 							<h3 class="flex gap-2 items-end text-[11px]">
 								{role.title}
-								<mark class="text-[10px] opacity-50"> {start} - {end} </mark>
+								<mark class="text-xxs opacity-50"> {start} - {end} </mark>
 							</h3>
 						{/each}
 					</div>
@@ -74,7 +82,7 @@
 				<a href="tel:0411032732">0411032732</a>
 			</li>
 			<li>
-				<a href="https://danoaky.dev">Portfolio</a>
+				<a href="https://danoaky.dev">Portfolio Website</a>
 			</li>
 			<li>
 				<a href="https://github.com/danieloakman">github.com/danieloakman</a>
@@ -92,29 +100,63 @@
 
 			<li>Wollongong, NSW</li>
 			<li>Working rights: Australian Citizen</li>
-
-			<br />
 		</ul>
 
 		<div class="flex flex-col gap-2">
 			<h2>Skills</h2>
 
-			<p>
-				<b>Strongest languages: </b>
-				{languages
+			{@render subSection({
+				title: 'Strongest languages',
+				content: languages
 					.slice(0, 4)
 					.map(({ name, years }) => `${years} years in ${name}`)
-					.join(', ')}.
-			</p>
+					.join(', ')
+			})}
 
-			<p>
-				<b>Other known languages: </b>
-				{languages
+			{@render subSection({
+				title: 'Other Known Languages',
+				content: languages
 					.slice(4)
-					.sort((a, b) => b.years - a.years)
+					.sort(skillByYears)
 					.map(({ name }) => name)
-					.join(', ')}.
-			</p>
+					.join(', ')
+			})}
+
+			{@render subSection({
+				title: 'Libraries & Frameworks',
+				content: libraries
+					.concat(frameworks)
+					.sort(skillByYears)
+					.filter(({ years }) => years > 1)
+					.map(({ name }) => name)
+					.join(', ')
+			})}
+
+			{@render subSection({
+				title: 'Tools & Platforms',
+				content: platforms
+					.concat(tools)
+					.sort(skillByYears)
+					.filter(({ years }) => years > 1)
+					.map(({ name }) => name)
+					.join(', ')
+			})}
+		</div>
+
+		<div class="flex flex-col gap-2">
+			<h2>Selected Projects</h2>
+
+			{#each PROJECTS.filter(({ selected }) => selected).slice(0, 4) as { name: title, description: content }}
+				{@render subSection({ title, content })}
+			{/each}
+		</div>
+
+		<div class="flex flex-col gap-2">
+			<h2>Education</h2>
+
+			{#each EDUCATION.filter(ed => !ed.institution.includes('Open')) as { institution, award, end }}
+				{@render subSection({ title: institution, content: `${award}${end ? ` - ${end.getFullYear()}` : ''}` })}
+			{/each}
 		</div>
 	</section>
 </main>
@@ -128,6 +170,10 @@
 
 	.row {
 		@apply flex flex-row gap-4;
+	}
+
+	.text-xxs {
+		@apply text-xs text-[10px];
 	}
 
 	h1 {
