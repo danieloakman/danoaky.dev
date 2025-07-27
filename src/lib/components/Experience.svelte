@@ -37,8 +37,4 @@
 			{/snippet}
 		</DescriptionCard>
 	{/each}
-
-	{#snippet bottom()}
-		<Link class="text-xl" href="./resume.pdf" intent="internal" target="_blank">View Resume</Link>
-	{/snippet}
 </Section>

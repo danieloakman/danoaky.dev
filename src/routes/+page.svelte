@@ -5,9 +5,10 @@
 <script lang="ts">
 	import Education from '$lib/components/Education.svelte';
 	import Experience from '$lib/components/Experience.svelte';
+	import Header from '$lib/components/Header.svelte';
+	import Link from '$lib/components/Link.svelte';
 	import Projects from '$lib/components/Projects.svelte';
 	import Section from '$lib/components/Section.svelte';
-	import Header from '$lib/components/Header.svelte';
 </script>
 
 <!-- @deprecated TODO: remove eventually.-->
@@ -23,6 +24,7 @@
 	<main class="flex flex-1 flex-col gap-30 py-10 xl:py-24">
 		<Section title="About">
 			{@render loremIpsum(20)}
+			<Link class="text-xl" href="./resume.pdf" intent="internal" target="_blank">View Resume</Link>
 		</Section>
 
 		<Experience />
