@@ -60,22 +60,22 @@
 			{#each sections as section}
 				{@const href = `#${section}`}
 				{@const isSelected = sectionInView === section}
-				<li class="group flex flex-row items-center gap-4">
-					<Hr
-						width="2"
-						class="transition-all duration-300 group-hover:w-20 group-hover:border-primary-500 {isSelected
-							? 'w-20 border-primary-500 opacity-70'
-							: 'w-10'}"
-					/>
+				<li class="group">
 					<a
 						{href}
-						class="capitalize {isSelected ? 'anchor' : ''}"
+						class="capitalize flex flex-row items-center gap-4 {isSelected ? 'anchor' : ''}"
 						onclick={(e) => {
 							e.preventDefault();
 							document.getElementById(section)?.scrollIntoView({ behavior: 'smooth' });
 							pushState(href, {});
 						}}
 					>
+						<Hr
+							width="2"
+							class="transition-all duration-300 group-hover:w-20 group-hover:border-primary-500 {isSelected
+								? 'w-20 border-primary-500 opacity-70'
+								: 'w-10'}"
+						/>
 						{section}
 					</a>
 				</li>
