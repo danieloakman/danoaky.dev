@@ -79,6 +79,11 @@ export const SKILLS = {
 		type: 'library',
 		years: calcYears('2025-')
 	},
+	chakraUi: {
+		name: 'Chakra UI',
+		type: 'library',
+		years: calcYears('2025')
+	},
 	svelte: {
 		name: 'Svelte',
 		type: 'framework',
@@ -249,11 +254,11 @@ export const SKILLS = {
 		type: 'tool',
 		years: calcYears('2018-2022,2024-')
 	},
-	webSockets: {
-		name: 'WebSockets',
-		type: 'tool',
-		years: calcYears('2022-')
-	},
+	// webSockets: {
+	// 	name: 'WebSockets',
+	// 	type: 'tool',
+	// 	years: calcYears('2022-')
+	// },
 	ciCd: {
 		name: 'CI/CD',
 		type: 'tool',
@@ -508,7 +513,7 @@ export const PROJECTS: Project[] = [
 			'A NextJS web app for creating, managing and distributing targeted email campaigns containing AI generated videos of sport celebrities and athletes.',
 		image: 'playai',
 		url: 'https://www.playai.co',
-		skills: selectSkills('TS', 'nextJs', 'node', 'tanstackQuery', 'fastify', 'docker', 'aws'),
+		skills: selectSkills('TS', 'nextJs', 'node', 'tanstackQuery', 'chakraUi', 'fastify', 'docker', 'aws'),
 		selected: true
 	},
 	{

@@ -20,10 +20,10 @@
 	const skillByYears = (a: Skill, b: Skill) => b.years - a.years;
 </script>
 
-{#snippet subSection({ title, content }: { title?: string; content: string })}
+{#snippet subSection({ title, content, href }: { title?: string; content: string; href?: string })}
 	<div>
 		{#if title}
-			<b>{title}</b>
+			<a {href}><b>{title}</b></a>
 		{/if}
 		<p class="leading-tight">{content}</p>
 	</div>
@@ -41,7 +41,7 @@
 		<h2>Experience</h2>
 
 		<div class="col">
-			{#each EXPERIENCE as { company, roles, description }}
+			{#each EXPERIENCE as { company, roles, description, url }}
 				{@const rolesCopy = roles.slice()}
 				{@const lastRole = rolesCopy.shift()}
 
@@ -50,7 +50,7 @@
 						{#if lastRole}
 							{@const { start, end } = formatStartEndDates(lastRole.start, lastRole.end)}
 							<h3 class="flex gap-2 items-end text-[11px]">
-								{lastRole.title} - <b class="font-semibold">{company}</b>
+								{lastRole.title} - <a href={url}><b class="font-semibold">{company}</b></a>
 								<mark class="text-xxs opacity-50"> {start} - {end} </mark>
 							</h3>
 						{/if}
@@ -82,7 +82,7 @@
 				<a href="tel:0411032732">0411032732</a>
 			</li>
 			<li>
-				<a href="https://danoaky.dev">Portfolio Website</a>
+				<a href="https://danoaky.dev">danoaky.dev (Portfolio Website)</a>
 			</li>
 			<li>
 				<a href="https://github.com/danieloakman">github.com/danieloakman</a>
@@ -146,16 +146,19 @@
 		<div class="flex flex-col gap-2">
 			<h2>Selected Projects</h2>
 
-			{#each PROJECTS.filter(({ selected }) => selected).slice(0, 4) as { name: title, description: content }}
-				{@render subSection({ title, content })}
+			{#each PROJECTS.filter(({ selected }) => selected).slice(0, 4) as { name: title, description: content, url }}
+				{@render subSection({ title, content, href: url })}
 			{/each}
 		</div>
 
 		<div class="flex flex-col gap-2">
 			<h2>Education</h2>
 
-			{#each EDUCATION.filter(ed => !ed.institution.includes('Open')) as { institution, award, end }}
-				{@render subSection({ title: institution, content: `${award}${end ? ` - ${end.getFullYear()}` : ''}` })}
+			{#each EDUCATION.filter((ed) => !ed.institution.includes('Open')) as { institution, award, end }}
+				{@render subSection({
+					title: institution,
+					content: `${award}${end ? ` - ${end.getFullYear()}` : ''}`
+				})}
 			{/each}
 		</div>
 	</section>
@@ -184,7 +187,7 @@
 		@apply text-primary-950 text-lg font-semibold;
 	}
 
-	a {
+	li > a {
 		@apply text-primary-900 underline;
 	}
 </style>
