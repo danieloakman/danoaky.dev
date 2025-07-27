@@ -29,13 +29,13 @@
 	</div>
 {/snippet}
 
-<main class="row p-10 text-surface-900 text-xxs">
-	<section class="col flex-2">
+<main class="row p-8 text-surface-900 text-xxs">
+	<section class="col flex-2 pr-4">
 		<h1>Daniel Brown</h1>
 
 		<p>
-			Experienced Senior Software Engineer with a focus on building fullstack for the web and
-			mobile.
+			Experienced Senior Software Engineer with a focus on building fullstack web and mobile
+			applications.
 		</p>
 
 		<h2>Experience</h2>
@@ -73,8 +73,8 @@
 		</div>
 	</section>
 
-	<section class="col flex-1">
-		<ul class="flex flex-col gap-0.5 border-1 border-primary-500 p-4 card">
+	<section class="col flex-1 border-1 border-primary-500 -ms-4 p-4 rounded-lg">
+		<ul class="flex flex-col gap-0.5">
 			<li>
 				<a href="mailto:doakman94@gmail.com">doakman94@gmail.com</a>
 			</li>
@@ -146,8 +146,12 @@
 		<div class="flex flex-col gap-2">
 			<h2>Selected Projects</h2>
 
-			{#each PROJECTS.filter(({ selected }) => selected).slice(0, 4) as { name: title, description: content, url }}
-				{@render subSection({ title, content, href: url })}
+			{#each PROJECTS.filter(({ selected }) => selected).slice(0, 4) as { name, madeAt, description, url }}
+				{@render subSection({
+					title: `${name}${madeAt === 'Personal' ? '' : ` - ${madeAt}`}`,
+					content: description,
+					href: url
+				})}
 			{/each}
 		</div>
 
