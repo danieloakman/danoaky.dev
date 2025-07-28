@@ -51,7 +51,7 @@
 <header class="flex flex-1 flex-col gap-4 max-h-screen py-10 xl:py-24 md:sticky md:top-0">
 	<h1 class="h1 text-preset-gradient-one">Daniel Brown</h1>
 	<h2 class="text-lg">Full Stack Software Engineer</h2>
-	<p class="opacity-70">I build web applications and mobile apps.</p>
+	<p class="opacity-70">I build performant, scalable digital experiences for the web and mobile.</p>
 
 	<br />
 

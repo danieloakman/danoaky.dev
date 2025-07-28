@@ -34,8 +34,8 @@
 		<h1>Daniel Brown</h1>
 
 		<p>
-			Experienced Senior Software Engineer with a focus on building fullstack web and mobile
-			applications.
+			Experienced Senior Software Engineer with a passion for building performant, scalable
+			digital experiences for the web and mobile.
 		</p>
 
 		<h2>Experience</h2>
