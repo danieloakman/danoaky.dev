@@ -10,6 +10,7 @@
 	import { page } from '$app/state';
 
 	import Hr from './Hr.svelte';
+	import LightSwitch from './LightSwitch.svelte';
 	import Social from './Social.svelte';
 
 	let { sections }: Props<TSection> = $props();
@@ -51,7 +52,7 @@
 <header class="flex flex-1 flex-col gap-4 max-h-screen py-10 xl:py-24 md:sticky md:top-0">
 	<h1 class="h1 text-preset-gradient-one">Daniel Brown</h1>
 	<h2 class="text-lg">Full Stack Software Engineer</h2>
-	<p class="opacity-70">I build performant, scalable digital experiences for the web and mobile.</p>
+	<p class="opacity-70">I build performant, scalable web and mobile applications.</p>
 
 	<br />
 
@@ -89,5 +90,7 @@
 		<Social type="github" />
 		<Social type="linkedin" />
 		<Social type="instagram" />
+		<div class="vr border-l-2" ></div>
+		<LightSwitch />
 	</div>
 </header>
