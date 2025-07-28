@@ -1,8 +1,6 @@
 <script lang="ts" module>
 	import type { Snippet } from 'svelte';
 
-	import { windowSize } from '$lib/state/index.svelte';
-
 	import Badge from './Badge.svelte';
 	import Card from './Card.svelte';
 	import Link from './Link.svelte';
