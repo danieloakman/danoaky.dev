@@ -1,4 +1,4 @@
-# [Danoaky](https://www.danoaky.dev)
+# [danoaky.dev](https://www.danoaky.dev)
 
 Portfolio website and resume creation.
 
@@ -29,4 +29,10 @@ You can preview the production build with `bun preview`.
 
 ## Deploying
 
-Merging to main will trigger a deployment to Cloudflare Pages which pushes the latest changes in main to [danoaky.dev](https://danoaky.dev).
+Merging to main will trigger a deployment to Cloudflare Workers which pushes the latest changes in main to [danoaky.dev](https://danoaky.dev).
+
+## Generating Resume
+
+```bash
+bun create-resume
+```

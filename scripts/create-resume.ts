@@ -1,18 +1,42 @@
 #! bun
+import { spawn } from 'bun';
 import chokidar from 'chokidar';
 import meow from 'meow';
 import path from 'path';
-import puppeteer from 'puppeteer';
+import puppeteer, { type Browser, LaunchOptions } from 'puppeteer';
 
-async function createResume({ output }: { output: string }) {
-	const browser = await puppeteer.launch();
-	try {
-		const page = await browser.newPage();
+class ResumeBrowser {
+	constructor(private readonly browser: Browser) {}
+
+	[Symbol.asyncDispose]() {
+		return this.browser.close();
+	}
+
+	static async create(options: LaunchOptions = {}) {
+		const browser = await puppeteer.launch(options);
+		return new ResumeBrowser(browser);
+	}
+
+	async createResume(output: string) {
+		const page = await this.browser.newPage();
 		await page.goto('http://localhost:5173/resume');
 		await page.pdf({ path: output, format: 'A4' });
-	} finally {
-		await browser.close();
+		console.log(`Resume created at ${output}`);
 	}
+}
+
+async function startDevServer(): Promise<AsyncDisposable> {
+	const server = spawn(['bun', 'dev']);
+	const decoder = new TextDecoder();
+	for await (const chunk of server.stdout.values()) {
+		const text = decoder.decode(chunk);
+		if (text.includes('ready')) break;
+	}
+	return {
+		[Symbol.asyncDispose]: async () => {
+			server.kill();
+		}
+	};
 }
 
 if (import.meta.main) {
@@ -42,18 +66,24 @@ if (import.meta.main) {
 		}
 	);
 
+	await using browser = await ResumeBrowser.create();
+	process.on('beforeExit', async () => {
+		await browser.close();
+	});
+	await using _server = await startDevServer();
+
 	if (cli.flags.watch) {
 		const watcher = chokidar.watch([
 			path.join(import.meta.dir, '../src/routes/resume/+page.svelte'),
 			path.join(import.meta.dir, '../src/lib/assets/content.ts')
 		]);
 		watcher.on('change', async () => {
-			await createResume({ output: cli.flags.output });
+			await browser.createResume(cli.flags.output);
 		});
 		watcher.on('ready', async () => {
-			await createResume({ output: cli.flags.output });
+			await browser.createResume(cli.flags.output);
 		});
 	} else {
-		createResume({ output: cli.flags.output });
+		await browser.createResume(cli.flags.output);
 	}
 }
