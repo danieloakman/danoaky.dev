@@ -29,8 +29,8 @@
 	</div>
 {/snippet}
 
-<main class="row p-8 text-surface-900 text-xxs">
-	<section class="col flex-2 pr-4">
+<main class="row p-8 text-xxs h-screen">
+	<section class="col flex-2">
 		<h1>Daniel Brown</h1>
 
 		<p>
@@ -51,14 +51,14 @@
 							{@const { start, end } = formatStartEndDates(lastRole.start, lastRole.end)}
 							<h3 class="flex gap-2 items-end text-[11px]">
 								{lastRole.title} - <a href={url}><b class="font-semibold">{company}</b></a>
-								<mark class="text-xxs opacity-50"> {start} - {end} </mark>
+								<p class="text-xxs opacity-60">{start} - {end}</p>
 							</h3>
 						{/if}
 						{#each rolesCopy as role}
 							{@const { start, end } = formatStartEndDates(role.start, role.end)}
 							<h3 class="flex gap-2 items-end text-[11px]">
 								{role.title}
-								<mark class="text-xxs opacity-50"> {start} - {end} </mark>
+								<p class="text-xxs opacity-60">{start} - {end}</p>
 							</h3>
 						{/each}
 					</div>
@@ -73,7 +73,7 @@
 		</div>
 	</section>
 
-	<section class="col flex-1 border-1 border-primary-500 -ms-4 p-4 rounded-lg">
+	<section class="col flex-1 vr border-primary-500 ps-4">
 		<ul class="flex flex-col gap-0.5">
 			<li>
 				<a href="mailto:doakman94@gmail.com">doakman94@gmail.com</a>
@@ -184,14 +184,14 @@
 	}
 
 	h1 {
-		@apply text-primary-950 text-3xl font-semibold;
+		@apply text-primary-700 text-3xl font-semibold;
 	}
 
 	h2 {
-		@apply text-primary-950 text-lg font-semibold;
+		@apply text-primary-700 text-lg font-semibold;
 	}
 
 	li > a {
-		@apply text-primary-900 underline;
+		@apply text-primary-800 underline;
 	}
 </style>

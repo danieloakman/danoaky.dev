@@ -1,42 +1,21 @@
 #! bun
-import { spawn } from 'bun';
 import chokidar from 'chokidar';
+import { readFileSync, writeFileSync } from 'fs';
 import meow from 'meow';
 import path from 'path';
-import puppeteer, { type Browser, LaunchOptions } from 'puppeteer';
+import puppeteer, { type Browser } from 'puppeteer';
 
-class ResumeBrowser {
-	constructor(private readonly browser: Browser) {}
+const setDataMode = (mode: 'light' | 'dark') => {
+	const appHtmlPath = path.join(import.meta.dir, '../src/app.html');
+	const text = readFileSync(appHtmlPath, 'utf8');
+	writeFileSync(appHtmlPath, text.replace(/data-mode="(dark|light)"/, `data-mode="${mode}"`));
+};
 
-	[Symbol.asyncDispose]() {
-		return this.browser.close();
-	}
-
-	static async create(options: LaunchOptions = {}) {
-		const browser = await puppeteer.launch(options);
-		return new ResumeBrowser(browser);
-	}
-
-	async createResume(output: string) {
-		const page = await this.browser.newPage();
-		await page.goto('http://localhost:5173/resume');
-		await page.pdf({ path: output, format: 'A4' });
-		console.log(`Resume created at ${output}`);
-	}
-}
-
-async function startDevServer(): Promise<AsyncDisposable> {
-	const server = spawn(['bun', 'dev']);
-	const decoder = new TextDecoder();
-	for await (const chunk of server.stdout.values()) {
-		const text = decoder.decode(chunk);
-		if (text.includes('ready')) break;
-	}
-	return {
-		[Symbol.asyncDispose]: async () => {
-			server.kill();
-		}
-	};
+async function createResume(browser: Browser, output: string) {
+	const page = await browser.newPage();
+	await page.goto('http://localhost:5173/resume');
+	await page.pdf({ path: output, format: 'A4', printBackground: true });
+	await page.close();
 }
 
 if (import.meta.main) {
@@ -66,11 +45,12 @@ if (import.meta.main) {
 		}
 	);
 
-	await using browser = await ResumeBrowser.create();
-	process.on('beforeExit', async () => {
-		await browser.close();
+	const browser = await puppeteer.launch();
+	setDataMode('light');
+	process.on('exit', () => {
+		setDataMode('dark');
+		browser.close();
 	});
-	await using _server = await startDevServer();
 
 	if (cli.flags.watch) {
 		const watcher = chokidar.watch([
@@ -78,12 +58,12 @@ if (import.meta.main) {
 			path.join(import.meta.dir, '../src/lib/assets/content.ts')
 		]);
 		watcher.on('change', async () => {
-			await browser.createResume(cli.flags.output);
+			await createResume(browser, cli.flags.output);
 		});
 		watcher.on('ready', async () => {
-			await browser.createResume(cli.flags.output);
+			await createResume(browser, cli.flags.output);
 		});
 	} else {
-		await browser.createResume(cli.flags.output);
+		await createResume(browser, cli.flags.output);
 	}
 }
