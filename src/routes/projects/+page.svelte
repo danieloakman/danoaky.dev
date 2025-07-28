@@ -1,14 +1,10 @@
 <script lang="ts">
-	import { ArrowLeft, ChevronUp, Minus, Plus } from '@lucide/svelte';
-	import { SvelteSet } from 'svelte/reactivity';
-	import { fade, fly, scale, slide } from 'svelte/transition';
+	import { ArrowLeft, ChevronUp } from '@lucide/svelte';
+	import { fly } from 'svelte/transition';
 
 	import { PROJECTS } from '$lib/assets/content';
 	import Badge from '$lib/components/Badge.svelte';
-	import Button from '$lib/components/Button.svelte';
 	import Link from '$lib/components/Link.svelte';
-	import Project from '$lib/components/Project.svelte';
-	import Projects from '$lib/components/Projects.svelte';
 	import { formatMonthYear } from '$lib/utils/dates';
 	import { domain } from '$lib/utils/url';
 
