@@ -1,6 +1,8 @@
 <script lang="ts" module>
 	import type { Snippet } from 'svelte';
 
+	import { windowSize } from '$lib/state/index.svelte';
+
 	import Badge from './Badge.svelte';
 	import Card from './Card.svelte';
 	import Link from './Link.svelte';
@@ -45,18 +47,24 @@
 	};
 </script>
 
-<Card class="group hover:!opacity-100 group-hover/list:opacity-50 flex gap-4 items-start {klass}">
+{#snippet imageSnippet(src: string, alt: string)}
+	<!-- Could support other image types, but we'd need to add an extension prop and add if else branches on each extension type here. Otherwise it can't be statically analysed. -->
+	{#await import(`../assets/images/${src}.png?w=160&fit=contain&format=webp`) then src}
+		<img
+			src={src.default}
+			{alt}
+			class="object-contain border-2 border-slate-500 group-hover:border-primary-500 transition-all duration-300 rounded-lg"
+		/>
+	{/await}
+{/snippet}
+
+<Card
+	class="group hover:!opacity-100 group-hover/list:opacity-50 flex items-start flex-col md:flex-row md:gap-4 {klass}"
+>
 	{#if image}
-		<!-- Could support other image types, but we'd need to add an extension prop and add if else branches on each extension type here. Otherwise it can't be statically analysed. -->
-		{#await import(`../assets/images/${image.src}.png?w=120&fit=contain&format=webp`) then src}
-			<img
-				src={src.default}
-				alt={image.alt}
-				class="object-contain border-2 border-slate-500 group-hover:border-primary-500 transition-all duration-300 rounded-lg"
-			/>
-		{/await}
+		{@render imageSnippet(image.src, image.alt)}
 	{:else if start && end && !image}
-		<p class="opacity-70 mt-1 min-w-32">{start} - {end}</p>
+		<span class="opacity-70 mt-1 min-w-32">{start} - {end}</span>
 	{/if}
 
 	<div class="flex flex-col gap-4">
