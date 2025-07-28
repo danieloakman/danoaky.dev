@@ -9,7 +9,7 @@
 </script>
 
 <div
-	class="flex flex-col justify-center gap-4 min-h-screen max-w-screen-xl p-10 transition-all duration-300"
+	class="flex flex-col justify-center gap-4 min-h-screen max-w-screen-xl p-10 transition-all duration-300 mx-auto"
 >
 	<a href="/" class="self-start flex gap-2 items-center anchor"><ArrowLeft />Daniel Brown</a>
 	<h1 class="h2 font-bold self-start text-preset-gradient-one">All Projects</h1>
