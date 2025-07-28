@@ -31,7 +31,7 @@
 
 <main class="row p-8 text-xxs h-screen">
 	<section class="col flex-2">
-		<h1>Daniel Brown</h1>
+		<a href="https://danoaky.dev" class="anchor"><h1>Daniel Brown</h1></a>
 
 		<p>
 			Experienced Senior Software Engineer with a passion for building performant, scalable
