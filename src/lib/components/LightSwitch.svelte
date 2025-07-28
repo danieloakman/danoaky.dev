@@ -1,5 +1,6 @@
 <script lang="ts" module>
 	import { Moon, Sun } from '@lucide/svelte';
+	import { fade, draw, blur,  } from 'svelte/transition';
 
 	export interface Props {
 		class?: string;
@@ -33,4 +34,8 @@
 	</script>
 </svelte:head>
 
-<Icon role="button" {onclick} class="w-8 h-8 {klass}" />
+{#key isDark}
+	<div in:blur>
+		<Icon role="button" {onclick} class="w-8 h-8 {klass}" />
+	</div>
+{/key}
