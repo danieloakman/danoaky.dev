@@ -89,8 +89,6 @@
 	<div class="flex gap-4 mt-auto">
 		<Social type="github" />
 		<Social type="linkedin" />
-		<Social type="instagram" />
-		<div class="vr border-l-2" ></div>
 		<LightSwitch />
 	</div>
 </header>
