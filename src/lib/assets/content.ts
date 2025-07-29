@@ -530,7 +530,7 @@ export const PROJECTS: Project[] = [
 	{
 		name: 'Lens of Brown Photography',
 		description:
-			'A website I wrote from scratch with Svelte-kit for my photography business. It’s a static website hosted on Github pages, with a score of 100 on Google lighthouse.',
+			'A website I wrote from scratch with Svelte-kit for my photography business. It\'s a static website hosted on Github pages, with a score of 100 on Google lighthouse.',
 		date: new Date('2024-06-01'),
 		madeAt: 'Personal',
 		skills: selectSkills('svelte', 'svelteKit', 'tailwind', 'bun'),
