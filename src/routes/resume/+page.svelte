@@ -49,7 +49,7 @@
 					<div class="flex flex-col">
 						{#if lastRole}
 							{@const { start, end } = formatStartEndDates(lastRole.start, lastRole.end)}
-							<h3 class="flex gap-2 items-end text-[11px]">
+							<h3 class="flex gap-1 items-end text-[11px]">
 								{lastRole.title} - <a href={url}><b class="font-semibold">{company}</b></a>
 								<p class="text-xxs opacity-60">{start} - {end}</p>
 							</h3>
@@ -70,6 +70,20 @@
 					</ul>
 				</div>
 			{/each}
+
+			<h2>Volunteering</h2>
+			<p>
+				Active WIRES volunteer, certified for Rescue and Immediate Care (native wildlife) and
+				Identification and Treatment of wombat mange. Passionate about helping native wildlife,
+				providing education to the community and assisting with wider population conservation
+				projects.
+			</p>
+
+			<h2>Interests</h2>
+			<p>
+				Outside of coding, I enjoy photography, playing video games, snowboarding, rock climbing and
+				spending time with my wonderful wife and dog.
+			</p>
 		</div>
 	</section>
 
@@ -89,7 +103,7 @@
 			</li>
 			<li>
 				<a href="https://www.linkedin.com/in/daniel-brown-7676161a0/">
-					linkedin.com/in/daniel-brown
+					linkedin.com/in/daniel-brown-7676161a0/
 				</a>
 			</li>
 			<li>
@@ -172,11 +186,11 @@
 	@reference '../../app.css';
 
 	.col {
-		@apply flex flex-col gap-4;
+		@apply flex flex-col gap-2;
 	}
 
 	.row {
-		@apply flex flex-row gap-4;
+		@apply flex flex-row gap-2;
 	}
 
 	.text-xxs {
