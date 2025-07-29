@@ -3,7 +3,7 @@
 
 	export interface Props {
 		class?: string;
-		type: 'github' | 'linkedin' | 'instagram';
+		type: 'github' | 'linkedin';
 	}
 	const MAP: Record<
 		Props['type'],
@@ -16,10 +16,6 @@
 		linkedin: {
 			href: 'https://www.linkedin.com/in/daniel-brown-7676161a0/',
 			Icon: Linkedin
-		},
-		instagram: {
-			href: 'https://www.instagram.com/danoaky/',
-			Icon: Instagram
 		}
 	};
 </script>
