@@ -65,5 +65,6 @@ if (import.meta.main) {
 		});
 	} else {
 		await createResume(browser, cli.flags.output);
+		process.exit(0);
 	}
 }
