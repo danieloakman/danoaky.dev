@@ -33,8 +33,12 @@ Merging to main will trigger a deployment to Cloudflare Workers which pushes the
 
 ## Generating Resume
 
+The [resume.pdf](./static/resume.pdf) file is captured/generated using Puppeteer. Puppeteer looks at the */resume* route, which can't be accessed in production.
+
 ```bash
-bun create-resume
+bun dev &
+sleep 5
+bun create-resume -w
 ```
 
 ## Inspiration
