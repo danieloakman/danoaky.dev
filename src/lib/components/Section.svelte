@@ -14,7 +14,7 @@
 
 <section id={title.toUpperCase()} class="flex flex-col gap-4 {klass}" {...rest}>
 	<h2
-		class="h2 sticky top-0 backdrop-blur-3xl z-10 text-preset-gradient-one px-8 py-4 -mx-8 md:py-0 md:px-0 md:mx-0 md:top-auto md:static md:backdrop-blur-none"
+		class="h2 sticky top-0 backdrop-blur-3xl z-10 text-preset-gradient-one px-4 py-4 -mx-4 md:py-0 md:px-0 md:mx-0 md:top-auto md:static md:backdrop-blur-none"
 	>
 		{title}
 	</h2>

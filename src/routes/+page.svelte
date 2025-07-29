@@ -12,11 +12,11 @@
 </script>
 
 <div
-	class="flex flex-col md:flex-row mx-auto gap-4 xl:gap-10 min-h-screen max-w-screen-xl px-8 xl:px-4"
+	class="flex flex-col md:flex-row mx-auto gap-4 md:gap-10 min-h-screen max-w-screen-xl px-4"
 >
 	<Header sections={SECTIONS} />
 
-	<main class="flex flex-1 flex-col gap-30 py-10 xl:py-24">
+	<main class="flex flex-1 flex-col gap-30 py-10 md:py-24">
 		<Section title="About">
 			<p>
 				I'm a Senior Software Engineer with a passion for building robust fullstack web and mobile
