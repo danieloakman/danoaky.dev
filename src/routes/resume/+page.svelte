@@ -90,24 +90,24 @@
 	<section class="col flex-1 vr border-primary-500 ps-4">
 		<ul class="flex flex-col gap-0.5">
 			<li>
-				<a href="mailto:doakman94@gmail.com">doakman94@gmail.com</a>
+				<a class="link" href="mailto:doakman94@gmail.com">doakman94@gmail.com</a>
 			</li>
 			<li>
-				<a href="tel:0411032732">0411032732</a>
+				<a class="link" href="tel:0411032732">0411032732</a>
 			</li>
 			<li>
-				<a href="https://danoaky.dev">danoaky.dev (Portfolio Website)</a>
+				<a class="link" href="https://danoaky.dev">danoaky.dev (Portfolio Website)</a>
 			</li>
 			<li>
-				<a href="https://github.com/danieloakman">github.com/danieloakman</a>
+				<a class="link" href="https://github.com/danieloakman">github.com/danieloakman</a>
 			</li>
 			<li>
-				<a href="https://www.linkedin.com/in/daniel-brown-7676161a0/">
+				<a class="link" href="https://www.linkedin.com/in/daniel-brown-7676161a0/">
 					linkedin.com/in/daniel-brown-7676161a0/
 				</a>
 			</li>
 			<li>
-				<a href="https://www.npmjs.com/~danoaky">npmjs.com/~danoaky</a>
+				<a class="link" href="https://www.npmjs.com/~danoaky">npmjs.com/~danoaky</a>
 			</li>
 
 			<br />
@@ -180,6 +180,12 @@
 			{/each}
 		</div>
 	</section>
+
+	<footer class="absolute bottom-1 right-1">
+		<a class="link" href="https://github.com/danieloakman/danoaky.dev?tab=readme-ov-file#generating-resume">
+			Generated on {new Date().toLocaleDateString()}
+		</a>
+	</footer>
 </main>
 
 <style lang="postcss">
@@ -205,7 +211,7 @@
 		@apply text-primary-700 text-lg font-semibold;
 	}
 
-	li > a {
+	.link {
 		@apply text-primary-800 underline;
 	}
 </style>
