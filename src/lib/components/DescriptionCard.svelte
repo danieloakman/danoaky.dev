@@ -57,7 +57,7 @@
 {/snippet}
 
 <Card
-	class="group hover:!opacity-100 group-hover/list:opacity-50 flex items-start flex-col md:flex-row md:gap-4 {klass}"
+	class="group md:hover:!opacity-100 md:group-hover/list:opacity-50 flex items-start flex-col md:flex-row md:gap-4 {klass}"
 >
 	{#if image}
 		{@render imageSnippet(image.src, image.alt)}
