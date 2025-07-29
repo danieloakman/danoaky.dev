@@ -34,8 +34,8 @@
 		<a href="https://danoaky.dev" class="anchor"><h1>Daniel Brown</h1></a>
 
 		<p>
-			Experienced Senior Software Engineer with a passion for building performant, scalable
-			digital experiences for the web and mobile.
+			Experienced Senior Software Engineer with a passion for building performant, scalable digital
+			experiences for the web and mobile.
 		</p>
 
 		<h2>Experience</h2>
@@ -158,7 +158,7 @@
 		<div class="flex flex-col gap-2">
 			<h2>Education</h2>
 
-			{#each EDUCATION.filter((ed) => !ed.institution.includes('Open')) as { institution, award, end }}
+			{#each EDUCATION as { institution, award, end }}
 				{@render subSection({
 					title: institution,
 					content: `${award}${end ? ` - ${end.getFullYear()}` : ''}`
