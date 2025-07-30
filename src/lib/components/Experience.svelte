@@ -8,28 +8,28 @@
 </script>
 
 <Section title="Experience">
-	{#each EXPERIENCE as experience}
-		{@const roles = experience.roles.slice()}
-		{@const lastRole = roles.shift()}
+	{#each EXPERIENCE as { summary, description, roles, company, url, skills, links }}
+		{@const lastRole = roles[0]}
+		{@const firstRole = roles.at(-1)}
 		{@const { start, end } = formatStartEndDates(
-			experience.roles.at(-1)?.start ?? new Date(),
+			firstRole?.start ?? new Date(),
 			lastRole?.end,
 			'short'
 		)}
 
 		<DescriptionCard
-			title={`${lastRole?.title} - ${experience.company}`}
-			subtitles={roles.map((role) => role.title)}
-			description={experience.summary ?? experience.description.join('\n')}
+			title={`${lastRole?.title} - ${company}`}
+			subtitles={roles.slice(1).map((role) => role.title)}
+			description={summary ?? description.join('\n')}
 			{start}
 			{end}
-			href={experience.url}
-			badges={experience.skills?.map((skill) => skill.name)}
+			href={url}
+			badges={skills?.map((skill) => skill.name)}
 		>
 			{#snippet extra()}
-				{#if experience.links}
+				{#if links}
 					<div class="flex flex-wrap gap-2">
-						{#each experience.links as link}
+						{#each links as link}
 							<Link href={link.url} target="_blank" intent="attachment">{link.title}</Link>
 						{/each}
 					</div>
