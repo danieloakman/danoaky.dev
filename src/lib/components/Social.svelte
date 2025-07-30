@@ -1,5 +1,6 @@
 <script lang="ts" module>
 	import { Github, Instagram, Linkedin } from '@lucide/svelte';
+	import { blur } from 'svelte/transition';
 
 	export interface Props {
 		class?: string;
@@ -26,7 +27,7 @@
 	const { href, Icon } = $derived(MAP[type]);
 </script>
 
-<a {href} target="_blank">
+<a in:blur {href} target="_blank">
 	<Icon
 		class="w-8 h-8 hover:stroke-primary-500 hover:translate-y-[-4px] hover:animate-pulse transition-all duration-300 {klass}"
 	/>
