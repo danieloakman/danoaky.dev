@@ -1,9 +1,6 @@
 <script lang="ts" module>
 	import { Moon, Sun } from '@lucide/svelte';
-	import { fade, draw, blur,  } from 'svelte/transition';
-
-	type Mode = 'light' | 'dark';
-	const DEFAULT_MODE = 'dark';
+	import { blur } from 'svelte/transition';
 
 	export interface Props {
 		class?: string;
@@ -17,7 +14,7 @@
 	const Icon = $derived(isDark ? Moon : Sun);
 
 	$effect(() => {
-		const mode = localStorage.getItem('mode') || DEFAULT_MODE;
+		const mode = localStorage.getItem('mode') || 'dark';
 		isDark = mode === 'dark';
 	});
 
@@ -32,7 +29,7 @@
 
 <svelte:head>
 	<script>
-		const mode = localStorage.getItem('mode') || DEFAULT_MODE;
+		const mode = localStorage.getItem('mode') || 'dark';
 		document.documentElement.setAttribute('data-mode', mode);
 	</script>
 </svelte:head>
