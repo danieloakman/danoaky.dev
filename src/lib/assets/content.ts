@@ -159,6 +159,11 @@ export const SKILLS = {
 		type: 'platform',
 		years: calcYears('2019-2023')
 	},
+	serverless: {
+		name: 'Serverless',
+		type: 'platform',
+		years: calcYears('2018-2023')
+	},
 	gcp: {
 		name: 'Google Cloud Platform',
 		type: 'platform',
@@ -283,6 +288,16 @@ export const SKILLS = {
 		name: 'Optical Character Recognition (OCR)',
 		type: 'tool',
 		years: calcYears('2021-2023')
+	},
+	sst: {
+		name: 'SST',
+		type: 'framework',
+		years: calcYears('2023-')
+	},
+	capacitor: {
+		name: 'Capacitor (Ionic)',
+		type: 'framework',
+		years: calcYears('2023-')
 	}
 } satisfies Record<string, Skill>;
 
@@ -396,7 +411,17 @@ export const EXPERIENCE: Experience[] = [
 		],
 		location: 'Wollongong NSW (remote)',
 		url: 'https://auxilis.com',
-		skills: selectSkills('TS', 'angular', 'react', 'node', 'python', 'golang', 'ciCd', 'aws')
+		skills: selectSkills(
+			'TS',
+			'angular',
+			'react',
+			'node',
+			'python',
+			'golang',
+			'ciCd',
+			'aws',
+			'serverless'
+		)
 	},
 	{
 		company: 'University of Wollongong',
@@ -513,7 +538,16 @@ export const PROJECTS: Project[] = [
 			'A NextJS web app for creating, managing and distributing targeted email campaigns containing AI generated videos of sport celebrities and athletes.',
 		image: 'playai',
 		url: 'https://www.playai.co',
-		skills: selectSkills('TS', 'nextJs', 'node', 'tanstackQuery', 'chakraUi', 'fastify', 'docker', 'aws'),
+		skills: selectSkills(
+			'TS',
+			'nextJs',
+			'node',
+			'tanstackQuery',
+			'chakraUi',
+			'fastify',
+			'docker',
+			'aws'
+		),
 		selected: true
 	},
 	{
@@ -530,7 +564,7 @@ export const PROJECTS: Project[] = [
 	{
 		name: 'Lens of Brown Photography',
 		description:
-			'A website I wrote from scratch with Svelte-kit for my photography business. It\'s a static website hosted on Github pages, with a score of 100 on Google lighthouse.',
+			"A website I wrote from scratch with Svelte-kit for my photography business. It's a static website hosted on Github pages, with a score of 100 on Google lighthouse.",
 		date: new Date('2024-06-01'),
 		madeAt: 'Personal',
 		skills: selectSkills('svelte', 'svelteKit', 'tailwind', 'bun'),
@@ -551,10 +585,48 @@ export const PROJECTS: Project[] = [
 		selected: true
 	},
 	{
+		name: '(Get It) Together',
+		madeAt: 'Personal',
+		date: new Date('2023-07-01'),
+		// TODO
+		description:
+			'A mobile app made with Svelte, Capacitor and PocketBase for managing family related events, tasks and more.',
+		skills: selectSkills(
+			'TS',
+			'svelte',
+			'svelteKit',
+			'capacitor',
+			'tailwind',
+			'AI',
+			'sst',
+			'tanstackQuery',
+			'pocketbase'
+		),
+		image: null
+	},
+	{
+		name: 'Auxilis Coding Standards',
+		description: 'Coding Standards for Auxilis, along with security and other guides and good practices. Mostly centred around Typescript and web practices. This was required for SOC2 compliance for the company.',
+		date: new Date('2023-01-01'),
+		madeAt: 'Auxilis',
+		skills: selectSkills('TS'),
+		image: null,
+		selected: true,
+	},
+	{
+		name: 'Document Parser UI (Development tool)',
+		madeAt: 'Auxilis',
+		date: new Date('2023-02-01'),
+		description:
+			'An in-house development tool made to help with the development of creating custom document parsers. Making new custom parsers for a new client is a time-consuming process, so this tool helped with scaffolding and the intiail development of new parsers, as well as creating entire simpler parsers.',
+		skills: selectSkills('TS', 'angular', 'node', 'ocr', 'aws', 'awsLambda', 'awsTextract', 'golang'),
+		image: null
+	},
+	{
 		name: 'Iteragain',
 		description:
 			'An NPM library that adds chainable iterator utility functions for Javascript, shipped with types.',
-		date: new Date('2022'),
+		date: new Date('2022-06-01'),
 		madeAt: 'Personal',
 		skills: selectSkills('TS', 'node', 'pnpm', 'npmPublishing', 'ciCd'),
 		image: 'iteragain',
@@ -562,7 +634,15 @@ export const PROJECTS: Project[] = [
 		sourceUrl: 'https://github.com/danieloakman/iteragain',
 		selected: true
 	},
-
+	{
+		name: 'Python PDF-miner API',
+		description:
+			'A Python Flask API running on AWS Lambda that used PDF-miner to extract text from PDF files. As well as a Typescript SDK that extended an OCR interface we used for all our other OCR sources like AWS Textract. Had a caching layer using DynamoDB.',
+		madeAt: 'Auxilis',
+		date: new Date('2022-02-01'),
+		skills: selectSkills('TS', 'node', 'python', 'ciCd', 'awsLambda', 'awsDynamoDB'),
+		image: null
+	},
 	{
 		name: 'Extractly - Validate',
 		description:
@@ -570,7 +650,17 @@ export const PROJECTS: Project[] = [
 		date: new Date('2021-05-01'),
 		madeAt: 'Auxilis',
 		image: 'extractly-validate',
-		skills: selectSkills('TS', 'angular', 'node', 'ciCd', 'ocr', 'AI', 'aws', 'awsLambda'),
+		skills: selectSkills(
+			'TS',
+			'angular',
+			'node',
+			'ciCd',
+			'ocr',
+			'AI',
+			'aws',
+			'awsLambda',
+			'awsTextract'
+		),
 		url: 'https://www.linkedin.com/company/extractly-ai/posts/?feedView=all',
 		selected: true
 	},
