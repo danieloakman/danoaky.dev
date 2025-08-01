@@ -305,7 +305,7 @@ const selectSkills = (...skills: (keyof typeof SKILLS)[]) => Object.values(pick(
 
 export const EXPERIENCE: Experience[] = [
 	{
-		company: 'FrogCo PTY LTD',
+		company: 'FrogCo',
 		roles: [
 			{
 				title: 'Senior Software Engineer',
@@ -532,7 +532,7 @@ export const PROJECTS: Project[] = [
 	},
 	{
 		name: 'PlayAI',
-		madeAt: 'FrogCo PTY LTD',
+		madeAt: 'FrogCo',
 		date: new Date('2025-03-01'),
 		description:
 			'A NextJS web app for creating, managing and distributing targeted email campaigns containing AI generated videos of sport celebrities and athletes.',
@@ -552,7 +552,7 @@ export const PROJECTS: Project[] = [
 	},
 	{
 		name: 'FrogBox Play',
-		madeAt: 'FrogCo PTY LTD',
+		madeAt: 'FrogCo',
 		date: new Date('2024-09-01'),
 		description:
 			'A mobile app for watching cricket clips and highlights. Videos are collected from livestreams across the UK and Australia, then clips are extracted using AI.',
