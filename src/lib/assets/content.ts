@@ -197,7 +197,7 @@ export const SKILLS = {
 	playwright: {
 		name: 'Playwright',
 		type: 'library',
-		years: calcYears('2023-')
+		years: calcYears('2020,2023-')
 	},
 	prisma: {
 		name: 'Prisma',
@@ -364,7 +364,8 @@ export const EXPERIENCE: Experience[] = [
 			'Maintenance and improvement of an established and large code base.',
 			'Extended application of Typescript and web developer based technology, to consistently meet client needs.',
 			'Regular exposure to continuous integration tools and development techniques.',
-			'Reviewed and trained team of junior developer performance and code.'
+			'Reviewed and trained team of junior developer performance and code.',
+			'Implemented automated tests using Playwright to ensure application reliability and quality.',
 		],
 		summary:
 			'Senior role focused on maintaining and enhancing a large-scale codebase using TypeScript and modern web technologies. Led code reviews and mentored junior developers while implementing continuous integration practices. Consistently delivered high-quality solutions that met client requirements through effective use of React, Node.js, and automated testing frameworks.',
@@ -478,7 +479,8 @@ export const EXPERIENCE: Experience[] = [
 			'Engagement and experience with remote team members, experience presenting complex projects to stakeholders in a remote environment.',
 			'Prompt delivery against internal and external timeframes, adaptive project management to exceed expectations.',
 			'Utilised AI driven solutions to parse complex OCR from documents.',
-			'Experience gained in Prisma backend and GraphQL.'
+			'Experience gained in Prisma backend and GraphQL.',
+			'Implemented end-to-end tests using Playwright as well as web-scraping utilities.'
 		],
 		summary:
 			'Progressive career growth from Trainee to Team Lead in Intelligent Document Processing, specializing in AI-driven OCR solutions, scalable microservices, and stakeholder management in a startup environment. Developed full-stack applications using TypeScript, Python, and Node.js, with expertise in building scalable backend architectures and microservices. Led remote teams, managed stakeholder relationships, and delivered AI-powered document processing solutions while mentoring developers and managing complex projects within tight timeframes.',
