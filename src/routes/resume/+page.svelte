@@ -183,7 +183,7 @@
 
 	<footer class="absolute bottom-1 right-1">
 		<a class="link" href="https://github.com/danieloakman/danoaky.dev?tab=readme-ov-file#generating-resume">
-			Generated on {new Date().toLocaleDateString()}
+			Generated on {new Date().toLocaleDateString('en-AU', { timeZone: 'Australia/Sydney' })}
 		</a>
 	</footer>
 </main>
