@@ -1,7 +1,10 @@
 #! bun
+import { Dayjs } from '@danoaky/js-utils';
 import chokidar from 'chokidar';
 import { readFileSync, writeFileSync } from 'fs';
+import { cp } from 'fs/promises';
 import meow from 'meow';
+import { tmpdir } from 'os';
 import path from 'path';
 import puppeteer, { type Browser } from 'puppeteer';
 
@@ -16,6 +19,8 @@ async function createResume(browser: Browser, output: string) {
 	await page.goto('http://localhost:5173/resume');
 	await page.pdf({ path: output, format: 'A4', printBackground: true });
 	await page.close();
+	const date = Dayjs().local().format('YYYY-MM-DD');
+	await cp(output, path.join(tmpdir(), `DJB_Resume_${date}.pdf`));
 }
 
 if (import.meta.main) {
