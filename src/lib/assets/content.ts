@@ -234,6 +234,11 @@ export const SKILLS = {
 		type: 'tool',
 		years: calcYears('2022-')
 	},
+	nix: {
+		name: 'Nix',
+		type: 'programming-language',
+		years: calcYears('2023-')
+	},
 	nixos: {
 		name: 'NixOS',
 		type: 'tool',
@@ -365,7 +370,7 @@ export const EXPERIENCE: Experience[] = [
 			'Extended application of Typescript and web developer based technology, to consistently meet client needs.',
 			'Regular exposure to continuous integration tools and development techniques.',
 			'Reviewed and trained team of junior developer performance and code.',
-			'Implemented automated tests using Playwright to ensure application reliability and quality.',
+			'Implemented automated tests using Playwright to ensure application reliability and quality.'
 		],
 		summary:
 			'Senior role focused on maintaining and enhancing a large-scale codebase using TypeScript and modern web technologies. Led code reviews and mentored junior developers while implementing continuous integration practices. Consistently delivered high-quality solutions that met client requirements through effective use of React, Node.js, and automated testing frameworks.',
@@ -587,6 +592,18 @@ export const PROJECTS: Project[] = [
 		selected: true
 	},
 	{
+		name: 'NixOS Configuration & dotfiles',
+		description:
+			'My NixOS configuration and dotfiles repository. I use NixOS as my primary operating system. This repository contains configuration for my desktop and laptop(s) as well as general dotfiles that can be symlinked to other non-NixOS systems (e.g. Windows, Mac). Support for both Gnome and Hyprland window/desktop managers.',
+		date: new Date('2023-10-03'),
+		madeAt: 'Personal',
+		skills: selectSkills('nix', 'nixos', 'linux'),
+		image: 'nixos',
+		url: 'https://nixos.org',
+		sourceUrl: 'https://github.com/danieloakman/dotfiles',
+		selected: true
+	},
+	{
 		name: '(Get It) Together',
 		madeAt: 'Personal',
 		date: new Date('2023-07-01'),
@@ -608,12 +625,13 @@ export const PROJECTS: Project[] = [
 	},
 	{
 		name: 'Auxilis Coding Standards',
-		description: 'Coding Standards for Auxilis, along with security and other guides and good practices. Mostly centred around Typescript and web practices. This was required for SOC2 compliance for the company.',
+		description:
+			'Coding Standards for Auxilis, along with security and other guides and good practices. Mostly centred around Typescript and web practices. This was required for SOC2 compliance for the company.',
 		date: new Date('2023-01-01'),
 		madeAt: 'Auxilis',
 		skills: selectSkills('TS'),
 		image: null,
-		selected: true,
+		selected: true
 	},
 	{
 		name: 'Document Parser UI (Development tool)',
@@ -621,7 +639,16 @@ export const PROJECTS: Project[] = [
 		date: new Date('2023-02-01'),
 		description:
 			'An in-house development tool made to help with the development of creating custom document parsers. Making new custom parsers for a new client is a time-consuming process, so this tool helped with scaffolding and the intiail development of new parsers, as well as creating entire simpler parsers.',
-		skills: selectSkills('TS', 'angular', 'node', 'ocr', 'aws', 'awsLambda', 'awsTextract', 'golang'),
+		skills: selectSkills(
+			'TS',
+			'angular',
+			'node',
+			'ocr',
+			'aws',
+			'awsLambda',
+			'awsTextract',
+			'golang'
+		),
 		image: null
 	},
 	{
