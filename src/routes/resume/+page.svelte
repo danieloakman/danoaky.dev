@@ -158,7 +158,7 @@
 		</div>
 
 		<div class="flex flex-col gap-2">
-			<h2>Selected Projects</h2>
+			<h2><a href="https://danoaky.dev/projects">Selected Projects</a></h2>
 
 			{#each PROJECTS.filter(({ selected }) => selected).slice(0, 4) as { name, madeAt, description, url }}
 				{@render subSection({
@@ -167,6 +167,8 @@
 					href: url
 				})}
 			{/each}
+
+			<a class="link" href="https://danoaky.dev/projects">View all my projects</a>
 		</div>
 
 		<div class="flex flex-col gap-2">
