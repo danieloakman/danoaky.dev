@@ -8,7 +8,7 @@
 </script>
 
 <Section title="Experience">
-	{#each EXPERIENCE as { summary, description, roles, company, url, skills, links } (company)}
+	{#each EXPERIENCE as { summary, description, roles, company, url, skills, links } (description)}
 		{@const lastRole = roles[0]}
 		{@const firstRole = roles.at(-1)}
 		{@const { start, end } = formatStartEndDates(
