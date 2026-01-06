@@ -310,6 +310,21 @@ const selectSkills = (...skills: (keyof typeof SKILLS)[]) => Object.values(pick(
 
 export const EXPERIENCE: Experience[] = [
 	{
+		company: 'Future Secure AI',
+		roles: [
+			{
+				title: 'Senior Software Engineer',
+				start: new Date('2025-09-01')
+			}
+		],
+		type: 'full-time',
+		description: ['todo'],
+		summary: 'todo',
+		location: 'Australia (remote)',
+		skills: selectSkills('JS', 'TS', 'awsTextract'),
+		url: 'https://www.futuresecure.ai'
+	},
+	{
 		company: 'FrogCo',
 		roles: [
 			{
