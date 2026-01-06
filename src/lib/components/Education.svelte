@@ -3,16 +3,10 @@
 
 	import DescriptionCard from './DescriptionCard.svelte';
 	import Section from './Section.svelte';
-
-	export interface Props {}
-</script>
-
-<script lang="ts">
-	let {}: Props = $props();
 </script>
 
 <Section title="Education">
-	{#each EDUCATION as education}
+	{#each EDUCATION as education (education.institution)}
 		<DescriptionCard title={education.institution} description={education.award}>
 			{#snippet extra()}
 				<p class="opacity-70">

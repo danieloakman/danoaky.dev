@@ -58,7 +58,7 @@
 
 	<nav class="hidden md:block">
 		<ul class="flex flex-col gap-4">
-			{#each sections as section}
+			{#each sections as section (section)}
 				{@const href = `#${section}`}
 				{@const isSelected = sectionInView === section}
 				<li class="group">

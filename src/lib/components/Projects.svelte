@@ -8,7 +8,7 @@
 </script>
 
 <Section title="Projects">
-	{#each PROJECTS.filter((p) => p.selected) as project}
+	{#each PROJECTS.filter((p) => p.selected) as project (project.name)}
 		<DescriptionCard
 			title={project.name}
 			subtitles={project.madeAt && project.madeAt !== 'Personal' ? [project.madeAt] : undefined}

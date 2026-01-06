@@ -30,7 +30,7 @@
 			</thead>
 
 			<tbody class="[&>tr]:hover:preset-tonal-secondary">
-				{#each PROJECTS as { name, date, madeAt, skills = [], url, sourceUrl, description }, idx}
+				{#each PROJECTS as { name, date, madeAt, skills = [], url, sourceUrl, description }, idx (name)}
 					{@const isExpanded = expanded === idx}
 					<tr class="cursor-pointer" onclick={() => (expanded = isExpanded ? undefined : idx)}>
 						<td>{formatMonthYear(date)}</td>
@@ -38,13 +38,13 @@
 						<td>{madeAt}</td>
 						<td>
 							<div class="flex flex-wrap flex-2 gap-2">
-								{#each skills as skill}
+								{#each skills as skill (skill.name)}
 									<Badge>{skill.name}</Badge>
 								{/each}
 							</div>
 						</td>
 						<td>
-							{#each [url, sourceUrl] as link}
+							{#each [url, sourceUrl] as link (link)}
 								{#if link}
 									<Link href={link} target="_blank">
 										{domain(link)}
