@@ -41,7 +41,7 @@
 		<h2>Experience</h2>
 
 		<div class="col">
-			{#each EXPERIENCE as { company, roles, description, url }}
+			{#each EXPERIENCE as { company, roles, description, url } (company)}
 				{@const rolesCopy = roles.slice()}
 				{@const lastRole = rolesCopy.shift()}
 
@@ -54,7 +54,7 @@
 								<p class="text-xxs opacity-60">{start} - {end}</p>
 							</h3>
 						{/if}
-						{#each rolesCopy as role}
+						{#each rolesCopy as role (role.title)}
 							{@const { start, end } = formatStartEndDates(role.start, role.end)}
 							<h3 class="flex gap-2 items-end text-[11px]">
 								{role.title}
@@ -64,7 +64,7 @@
 					</div>
 
 					<ul class="pl-6 flex flex-col list-disc">
-						{#each description as description}
+						{#each description as description (description)}
 							<li>{description}</li>
 						{/each}
 					</ul>
@@ -160,7 +160,7 @@
 		<div class="flex flex-col gap-2">
 			<h2><a href="https://danoaky.dev/projects">Selected Projects</a></h2>
 
-			{#each PROJECTS.filter(({ selected }) => selected).slice(0, 4) as { name, madeAt, description, url }}
+			{#each PROJECTS.filter(({ selected }) => selected).slice(0, 4) as { name, madeAt, description, url } (name)}
 				{@render subSection({
 					title: `${name}${madeAt === 'Personal' ? '' : ` - ${madeAt}`}`,
 					content: description,
@@ -174,7 +174,7 @@
 		<div class="flex flex-col gap-2">
 			<h2>Education</h2>
 
-			{#each EDUCATION as { institution, award, end }}
+			{#each EDUCATION as { institution, award, end } (institution)}
 				{@render subSection({
 					title: institution,
 					content: `${award}${end ? ` - ${end.getFullYear()}` : ''}`
