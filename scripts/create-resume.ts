@@ -6,9 +6,6 @@ import { cp } from 'fs/promises';
 import meow from 'meow';
 import { tmpdir } from 'os';
 import path from 'path';
-// import puppeteer, { type Browser } from 'puppeteer';
-// import { chromium } from 'play';
-// import {} from 'playwright-core'
 
 const setDataMode = (mode: 'light' | 'dark') => {
 	const appHtmlPath = path.join(import.meta.dir, '../src/app.html');
