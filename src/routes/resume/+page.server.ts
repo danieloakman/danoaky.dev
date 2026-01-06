@@ -1,4 +1,5 @@
-import { error, type ServerLoad } from '@sveltejs/kit';
+import { type ServerLoad, error } from '@sveltejs/kit';
+
 import { dev } from '$app/environment';
 
 export const load: ServerLoad = async () => {

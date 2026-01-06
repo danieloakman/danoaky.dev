@@ -35,7 +35,8 @@
 				containerization and advanced backend architectures.
 			</p>
 			<p>
-				Outside of coding, I enjoy photography, playing video games, snowboarding, rock climbing and spending time with my wonderful wife and dog.
+				Outside of coding, I enjoy photography, playing video games, snowboarding, rock climbing and
+				spending time with my wonderful wife and dog.
 			</p>
 
 			<Link class="text-xl" href="./resume.pdf" intent="internal" target="_blank">View Resume</Link>
