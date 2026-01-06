@@ -1,5 +1,5 @@
 #! bun
-import { Dayjs, sh } from '@danoaky/js-utils';
+import { Dayjs, sh, Result } from '@danoaky/js-utils';
 import chokidar from 'chokidar';
 import { readFileSync, writeFileSync } from 'fs';
 import { cp } from 'fs/promises';
@@ -14,7 +14,7 @@ const setDataMode = (mode: 'light' | 'dark') => {
 };
 
 async function createResume(output: string) {
-	await sh(`bun playwright pdf "http://localhost:5173/resume" "${output}"`);
+	await sh(`bun playwright pdf "http://localhost:5173/resume" "${output}"`).then(Result.unwrap);
 	const date = Dayjs().local().format('YYYY-MM-DD');
 	await cp(output, path.join(tmpdir(), `DJB_Resume_${date}.pdf`));
 }
