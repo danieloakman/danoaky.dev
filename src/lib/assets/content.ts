@@ -494,12 +494,12 @@ export const EXPERIENCE: Experience[] = [
 			'Experience working in a startup environment.',
 			'Regular communication with internal executives and external stakeholders.',
 			'Utilised Typescript & Node to deliver scalable backend architectures & microservices.',
-			'Advanced knowledge of pricing and awareness of costs in an application that requires IDP.',
+			// 'Advanced knowledge of pricing and awareness of costs in an application that requires IDP.',
 			'Experience in tutoring, mentoring and career development of other developers, clients and stakeholders.',
 			'Engagement and experience with remote team members, experience presenting complex projects to stakeholders in a remote environment.',
-			'Prompt delivery against internal and external timeframes, adaptive project management to exceed expectations.',
+			// 'Prompt delivery against internal and external timeframes, adaptive project management to exceed expectations.',
 			'Utilised AI driven solutions to parse complex OCR from documents.',
-			'Experience gained in Prisma backend and GraphQL.',
+			// 'Experience gained in Prisma backend and GraphQL.',
 			'Implemented end-to-end tests using Playwright as well as web-scraping utilities.'
 		],
 		summary:
