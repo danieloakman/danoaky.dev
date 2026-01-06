@@ -10,19 +10,18 @@
         pkgs = nixpkgs.legacyPackages.${system};
       in
       {
-        devShells.default = pkgs.buildFHSEnv {
+        devShells.default = pkgs.mkShell {
           name = "danoaky.dev";
-          targetPkgs = pkgs: with pkgs; [
+          NIX_BUILD_SHELL = "${pkgs.zsh}/bin/zsh";
+          packages = with pkgs; [
             bun
-            glib
-            glibc
-            glib.dev
-            libgcc
-            stdenv.cc.cc.lib
+            playwright-driver
+            # puppeteer-cli
           ];
-          profile = ''
+          shellHook = ''
+            export PLAYWRIGHT_SKIP_VALIDATE_HOST_REQUIREMENTS=true
+            export PLAYWRIGHT_BROWSERS_PATH=${pkgs.playwright-driver.browsers}
           '';
-          runScript = "zsh";
         };
       });
 }
