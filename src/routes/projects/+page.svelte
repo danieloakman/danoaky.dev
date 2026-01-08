@@ -44,7 +44,7 @@
 							</div>
 						</td>
 						<td>
-							{#each [url, sourceUrl] as link (link)}
+							{#each [url, sourceUrl] as link, idx (link || idx)}
 								{#if link}
 									<Link href={link} target="_blank">
 										{domain(link)}
