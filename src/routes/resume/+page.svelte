@@ -30,7 +30,7 @@
 	</div>
 {/snippet}
 
-<main class="row p-6 text-xxs h-screen">
+<main class="row p-7 text-xxs h-screen">
 	<section class="col flex-2">
 		<a href="https://danoaky.dev" class="anchor"><h1>Daniel Brown</h1></a>
 
@@ -39,7 +39,7 @@
 			experiences for the web and mobile.
 		</p>
 
-		<h2>Experience</h2>
+		<h2><a href="https://danoaky.dev#EXPERIENCE">Experience</a></h2>
 
 		<div class="col">
 			{#each EXPERIENCE as { company, roles, description, url } (company)}
@@ -51,7 +51,9 @@
 						{#if lastRole}
 							{@const { start, end } = formatStartEndDates(lastRole.start, lastRole.end)}
 							<h3 class="flex gap-1 items-end text-[11px]">
-								{lastRole.title} - <a href={url} target="_blank"><b class="font-semibold">{company}</b></a>
+								{lastRole.title} -
+								<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
+								<a href={url} target="_blank"><b class="font-semibold">{company}</b></a>
 								<p class="text-xxs opacity-60">{start} - {end}</p>
 							</h3>
 						{/if}
@@ -64,13 +66,15 @@
 						{/each}
 					</div>
 
-					<ul class="pl-6 flex flex-col list-disc">
+					<ul class="pl-6 flex flex-col list-disc text-[9.5px]">
 						{#each description as description (description)}
 							<li>{description}</li>
 						{/each}
 					</ul>
 				</div>
 			{/each}
+
+			<!-- <a class="link" href="https://danoaky.dev#EXPERIENCE">View all my experience</a> -->
 
 			<h2>Volunteering</h2>
 			<p>
@@ -89,7 +93,7 @@
 	</section>
 
 	<section class="col flex-1 vr border-primary-500 ps-4">
-		<ul class="flex flex-col gap-0.5">
+		<ul class="flex flex-col gap-0">
 			<li>
 				<a class="link" href="mailto:doakman94@gmail.com">doakman94@gmail.com</a>
 			</li>
@@ -142,7 +146,7 @@
 				content: libraries
 					.concat(frameworks)
 					.sort(skillByYears)
-					.filter(({ years }) => years > 1)
+					.filter(({ years }) => years > 2)
 					.map(({ name }) => name)
 					.join(', ')
 			})}
@@ -152,7 +156,7 @@
 				content: platforms
 					.concat(tools)
 					.sort(skillByYears)
-					.filter(({ years }) => years > 1)
+					.filter(({ years }) => years > 2)
 					.map(({ name }) => name)
 					.join(', ')
 			})}
@@ -210,14 +214,14 @@
 	}
 
 	h1 {
-		@apply text-primary-700 text-3xl font-semibold;
+		@apply text-primary-300 text-3xl font-semibold;
 	}
 
 	h2 {
-		@apply text-primary-700 text-lg font-semibold;
+		@apply text-primary-300 text-lg font-semibold;
 	}
 
 	.link {
-		@apply text-primary-800 underline;
+		@apply text-primary-600 underline;
 	}
 </style>

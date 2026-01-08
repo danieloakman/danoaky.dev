@@ -328,10 +328,14 @@ export const EXPERIENCE: Experience[] = [
 			}
 		],
 		type: 'full-time',
-		description: ['todo'],
+		description: [
+			'Development of AI powered assistants to help automate tasks and processes.',
+			'Utilise the latest AI models and tools with n8n and Flowise.',
+			'Migration of large legacy codebases to take advantage of newer tools and platforms like n8n.'
+		],
 		summary: 'todo',
 		location: 'Australia (remote)',
-		skills: selectSkills('TS', 'AI', 'n8n', 'flowise', 'awsTextract'),
+		skills: selectSkills('TS', 'AI', 'n8n', 'flowise', 'awsTextract', 'postgresql'),
 		url: 'https://www.futuresecure.ai'
 	},
 	{
@@ -438,7 +442,7 @@ export const EXPERIENCE: Experience[] = [
 		description: [
 			'Providing strategic direction and technical advice to support and guide existing project operations.',
 			'Guiding design pattern decisions to optimise efficiency, readability and ease of maintenance.',
-			'Continued high level application of Python, Typescript, React & Node, including mentorship of in-house staff.'
+			'Continued high level application of Python, Typescript & Node, including mentorship of staff.'
 		],
 		location: 'Wollongong NSW (remote)',
 		url: 'https://auxilis.com',
@@ -509,7 +513,7 @@ export const EXPERIENCE: Experience[] = [
 			'Engagement and experience with remote team members, experience presenting complex projects to stakeholders in a remote environment.',
 			// 'Prompt delivery against internal and external timeframes, adaptive project management to exceed expectations.',
 			'Utilised AI driven solutions to parse complex OCR from documents.',
-			// 'Experience gained in Prisma backend and GraphQL.',
+			'Experience gained in Prisma backend and GraphQL.',
 			'Implemented end-to-end tests using Playwright as well as web-scraping utilities.'
 		],
 		summary:
