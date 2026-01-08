@@ -333,7 +333,8 @@ export const EXPERIENCE: Experience[] = [
 			'Utilise the latest AI models and tools with n8n and Flowise.',
 			'Migration of large legacy codebases to take advantage of newer tools and platforms like n8n.'
 		],
-		summary: 'todo',
+		summary:
+			'Development of AI-powered assistants for task automation using modern AI models and tools (n8n, Flowise), and migration of legacy codebases to modern platforms.',
 		location: 'Australia (remote)',
 		skills: selectSkills('TS', 'AI', 'n8n', 'flowise', 'awsTextract', 'postgresql'),
 		url: 'https://www.futuresecure.ai'
