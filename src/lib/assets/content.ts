@@ -303,6 +303,16 @@ export const SKILLS = {
 		name: 'Capacitor (Ionic)',
 		type: 'framework',
 		years: calcYears('2023-')
+	},
+	n8n: {
+		name: 'n8n',
+		type: 'library',
+		years: calcYears('2025-')
+	},
+	flowise: {
+		name: 'Flowise',
+		type: 'library',
+		years: calcYears('2025-')
 	}
 } satisfies Record<string, Skill>;
 
@@ -321,7 +331,7 @@ export const EXPERIENCE: Experience[] = [
 		description: ['todo'],
 		summary: 'todo',
 		location: 'Australia (remote)',
-		skills: selectSkills('JS', 'TS', 'awsTextract'),
+		skills: selectSkills('TS', 'AI', 'n8n', 'flowise', 'awsTextract'),
 		url: 'https://www.futuresecure.ai'
 	},
 	{
