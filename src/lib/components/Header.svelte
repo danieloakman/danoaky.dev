@@ -22,7 +22,7 @@
 					.map((section) => document.getElementById(section))
 					.filter(Boolean) as HTMLElement[])
 	);
-	let sectionInView = $state<TSection | undefined>(
+	let sectionInView = $derived<TSection | undefined>(
 		(page.url.hash.slice(1) as TSection) || sections[0]
 	);
 	const onWindowScroll = () => {
@@ -58,7 +58,7 @@
 
 	<nav class="hidden md:block">
 		<ul class="flex flex-col gap-4">
-			{#each sections as section}
+			{#each sections as section (section)}
 				{@const href = `#${section}`}
 				{@const isSelected = sectionInView === section}
 				<li class="group">
@@ -68,6 +68,7 @@
 						onclick={(e) => {
 							e.preventDefault();
 							document.getElementById(section)?.scrollIntoView({ behavior: 'smooth' });
+							// eslint-disable-next-line svelte/no-navigation-without-resolve
 							pushState(href, {});
 						}}
 					>

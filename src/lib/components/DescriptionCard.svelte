@@ -37,12 +37,6 @@
 		class: klass = '',
 		extra
 	}: Props = $props();
-
-	const onClick = () => {
-		if (href) {
-			window.open(href, '_blank');
-		}
-	};
 </script>
 
 {#snippet imageSnippet(src: string, alt: string)}
@@ -84,7 +78,7 @@
 				<h3 class="group-hover:text-primary-500">{title}</h3>
 			{/if}
 
-			{#each subtitles as subtitle}
+			{#each subtitles as subtitle (subtitle)}
 				<p class="opacity-70">{subtitle}</p>
 			{/each}
 		</div>
@@ -95,7 +89,7 @@
 
 		{#if badges}
 			<div class="flex flex-wrap gap-2">
-				{#each badges as badge}
+				{#each badges as badge (badge)}
 					<Badge>{badge}</Badge>
 				{/each}
 			</div>

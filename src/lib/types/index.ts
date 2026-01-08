@@ -1,5 +1,3 @@
-import type { Snippet } from 'svelte';
-
 export interface Skill {
 	name: string;
 	type: 'programming-language' | 'library' | 'framework' | 'tool' | 'platform' | 'other';

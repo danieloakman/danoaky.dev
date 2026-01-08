@@ -1,12 +1,11 @@
 #! bun
-import { Dayjs } from '@danoaky/js-utils';
+import { Dayjs, Result, sh } from '@danoaky/js-utils';
 import chokidar from 'chokidar';
 import { readFileSync, writeFileSync } from 'fs';
 import { cp } from 'fs/promises';
 import meow from 'meow';
 import { tmpdir } from 'os';
 import path from 'path';
-import puppeteer, { type Browser } from 'puppeteer';
 
 const setDataMode = (mode: 'light' | 'dark') => {
 	const appHtmlPath = path.join(import.meta.dir, '../src/app.html');
@@ -14,11 +13,8 @@ const setDataMode = (mode: 'light' | 'dark') => {
 	writeFileSync(appHtmlPath, text.replace(/data-mode="(dark|light)"/, `data-mode="${mode}"`));
 };
 
-async function createResume(browser: Browser, output: string) {
-	const page = await browser.newPage();
-	await page.goto('http://localhost:5173/resume');
-	await page.pdf({ path: output, format: 'A4', printBackground: true });
-	await page.close();
+async function createResume(output: string) {
+	await sh(`bun playwright pdf "http://localhost:5173/resume" "${output}"`).then(Result.unwrap);
 	const date = Dayjs().local().format('YYYY-MM-DD');
 	await cp(output, path.join(tmpdir(), `DJB_Resume_${date}.pdf`));
 }
@@ -50,11 +46,9 @@ if (import.meta.main) {
 		}
 	);
 
-	const browser = await puppeteer.launch();
 	setDataMode('light');
 	process.on('exit', () => {
 		setDataMode('dark');
-		browser.close();
 	});
 
 	if (cli.flags.watch) {
@@ -63,13 +57,13 @@ if (import.meta.main) {
 			path.join(import.meta.dir, '../src/lib/assets/content.ts')
 		]);
 		watcher.on('change', async () => {
-			await createResume(browser, cli.flags.output);
+			await createResume(cli.flags.output);
 		});
 		watcher.on('ready', async () => {
-			await createResume(browser, cli.flags.output);
+			await createResume(cli.flags.output);
 		});
 	} else {
-		await createResume(browser, cli.flags.output);
+		await createResume(cli.flags.output);
 		process.exit(0);
 	}
 }

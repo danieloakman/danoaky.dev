@@ -7,7 +7,7 @@ const config = {
 	kit: {
 		adapter: adapter(),
 		prerender: {
-			handleHttpError: ({ path, referrer, message }) => {
+			handleHttpError: ({ path, message }) => {
 				if (path === '/resume') return;
 				throw new Error(message);
 			}

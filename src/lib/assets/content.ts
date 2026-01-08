@@ -303,12 +303,42 @@ export const SKILLS = {
 		name: 'Capacitor (Ionic)',
 		type: 'framework',
 		years: calcYears('2023-')
+	},
+	n8n: {
+		name: 'n8n',
+		type: 'library',
+		years: calcYears('2025-')
+	},
+	flowise: {
+		name: 'Flowise',
+		type: 'library',
+		years: calcYears('2025-')
 	}
 } satisfies Record<string, Skill>;
 
 const selectSkills = (...skills: (keyof typeof SKILLS)[]) => Object.values(pick(SKILLS, skills));
 
 export const EXPERIENCE: Experience[] = [
+	{
+		company: 'Future Secure AI',
+		roles: [
+			{
+				title: 'Senior Software Engineer',
+				start: new Date('2025-09-01')
+			}
+		],
+		type: 'full-time',
+		description: [
+			'Development of AI powered assistants to help automate tasks and processes.',
+			'Utilise the latest AI models and tools with n8n and Flowise.',
+			'Migration of large legacy codebases to take advantage of newer tools and platforms like n8n.'
+		],
+		summary:
+			'Development of AI-powered assistants for task automation using modern AI models and tools (n8n, Flowise), and migration of legacy codebases to modern platforms.',
+		location: 'Australia (remote)',
+		skills: selectSkills('TS', 'AI', 'n8n', 'flowise', 'awsTextract', 'postgresql'),
+		url: 'https://www.futuresecure.ai'
+	},
 	{
 		company: 'FrogCo',
 		roles: [
@@ -413,7 +443,7 @@ export const EXPERIENCE: Experience[] = [
 		description: [
 			'Providing strategic direction and technical advice to support and guide existing project operations.',
 			'Guiding design pattern decisions to optimise efficiency, readability and ease of maintenance.',
-			'Continued high level application of Python, Typescript, React & Node, including mentorship of in-house staff.'
+			'Continued high level application of Python, Typescript & Node, including mentorship of staff.'
 		],
 		location: 'Wollongong NSW (remote)',
 		url: 'https://auxilis.com',
@@ -479,10 +509,10 @@ export const EXPERIENCE: Experience[] = [
 			'Experience working in a startup environment.',
 			'Regular communication with internal executives and external stakeholders.',
 			'Utilised Typescript & Node to deliver scalable backend architectures & microservices.',
-			'Advanced knowledge of pricing and awareness of costs in an application that requires IDP.',
+			// 'Advanced knowledge of pricing and awareness of costs in an application that requires IDP.',
 			'Experience in tutoring, mentoring and career development of other developers, clients and stakeholders.',
 			'Engagement and experience with remote team members, experience presenting complex projects to stakeholders in a remote environment.',
-			'Prompt delivery against internal and external timeframes, adaptive project management to exceed expectations.',
+			// 'Prompt delivery against internal and external timeframes, adaptive project management to exceed expectations.',
 			'Utilised AI driven solutions to parse complex OCR from documents.',
 			'Experience gained in Prisma backend and GraphQL.',
 			'Implemented end-to-end tests using Playwright as well as web-scraping utilities.'

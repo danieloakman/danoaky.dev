@@ -1,7 +1,7 @@
 <script lang="ts" module>
 	import type { HTMLAttributes } from 'svelte/elements';
 
-	export interface Props extends HTMLAttributes<HTMLDivElement> {}
+	export type Props = HTMLAttributes<HTMLDivElement>;
 </script>
 
 <script lang="ts">

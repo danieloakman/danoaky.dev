@@ -23,13 +23,14 @@
 {#snippet subSection({ title, content, href }: { title?: string; content: string; href?: string })}
 	<div>
 		{#if title}
+			<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
 			<a {href}><b>{title}</b></a>
 		{/if}
 		<p class="leading-tight">{content}</p>
 	</div>
 {/snippet}
 
-<main class="row p-8 text-xxs h-screen">
+<main class="row p-7 text-xxs h-screen">
 	<section class="col flex-2">
 		<a href="https://danoaky.dev" class="anchor"><h1>Daniel Brown</h1></a>
 
@@ -38,10 +39,10 @@
 			experiences for the web and mobile.
 		</p>
 
-		<h2>Experience</h2>
+		<h2><a href="https://danoaky.dev#EXPERIENCE">Experience</a></h2>
 
 		<div class="col">
-			{#each EXPERIENCE as { company, roles, description, url }}
+			{#each EXPERIENCE as { company, roles, description, url } (company)}
 				{@const rolesCopy = roles.slice()}
 				{@const lastRole = rolesCopy.shift()}
 
@@ -50,11 +51,13 @@
 						{#if lastRole}
 							{@const { start, end } = formatStartEndDates(lastRole.start, lastRole.end)}
 							<h3 class="flex gap-1 items-end text-[11px]">
-								{lastRole.title} - <a href={url}><b class="font-semibold">{company}</b></a>
+								{lastRole.title} -
+								<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
+								<a href={url} target="_blank"><b class="font-semibold">{company}</b></a>
 								<p class="text-xxs opacity-60">{start} - {end}</p>
 							</h3>
 						{/if}
-						{#each rolesCopy as role}
+						{#each rolesCopy as role (role.title)}
 							{@const { start, end } = formatStartEndDates(role.start, role.end)}
 							<h3 class="flex gap-2 items-end text-[11px]">
 								{role.title}
@@ -63,13 +66,15 @@
 						{/each}
 					</div>
 
-					<ul class="pl-6 flex flex-col list-disc">
-						{#each description as description}
+					<ul class="pl-6 flex flex-col list-disc text-[9.5px]">
+						{#each description as description (description)}
 							<li>{description}</li>
 						{/each}
 					</ul>
 				</div>
 			{/each}
+
+			<!-- <a class="link" href="https://danoaky.dev#EXPERIENCE">View all my experience</a> -->
 
 			<h2>Volunteering</h2>
 			<p>
@@ -88,7 +93,7 @@
 	</section>
 
 	<section class="col flex-1 vr border-primary-500 ps-4">
-		<ul class="flex flex-col gap-0.5">
+		<ul class="flex flex-col gap-0">
 			<li>
 				<a class="link" href="mailto:doakman94@gmail.com">doakman94@gmail.com</a>
 			</li>
@@ -141,7 +146,7 @@
 				content: libraries
 					.concat(frameworks)
 					.sort(skillByYears)
-					.filter(({ years }) => years > 1)
+					.filter(({ years }) => years > 2)
 					.map(({ name }) => name)
 					.join(', ')
 			})}
@@ -151,7 +156,7 @@
 				content: platforms
 					.concat(tools)
 					.sort(skillByYears)
-					.filter(({ years }) => years > 1)
+					.filter(({ years }) => years > 2)
 					.map(({ name }) => name)
 					.join(', ')
 			})}
@@ -160,7 +165,7 @@
 		<div class="flex flex-col gap-2">
 			<h2><a href="https://danoaky.dev/projects">Selected Projects</a></h2>
 
-			{#each PROJECTS.filter(({ selected }) => selected).slice(0, 4) as { name, madeAt, description, url }}
+			{#each PROJECTS.filter(({ selected }) => selected).slice(0, 4) as { name, madeAt, description, url } (name)}
 				{@render subSection({
 					title: `${name}${madeAt === 'Personal' ? '' : ` - ${madeAt}`}`,
 					content: description,
@@ -174,7 +179,7 @@
 		<div class="flex flex-col gap-2">
 			<h2>Education</h2>
 
-			{#each EDUCATION as { institution, award, end }}
+			{#each EDUCATION as { institution, award, end } (institution)}
 				{@render subSection({
 					title: institution,
 					content: `${award}${end ? ` - ${end.getFullYear()}` : ''}`
@@ -184,7 +189,10 @@
 	</section>
 
 	<footer class="absolute bottom-1 right-1">
-		<a class="link" href="https://github.com/danieloakman/danoaky.dev?tab=readme-ov-file#generating-resume">
+		<a
+			class="link"
+			href="https://github.com/danieloakman/danoaky.dev?tab=readme-ov-file#generating-resume"
+		>
 			Generated on {new Date().toLocaleDateString('en-AU', { timeZone: 'Australia/Sydney' })}
 		</a>
 	</footer>
@@ -206,14 +214,14 @@
 	}
 
 	h1 {
-		@apply text-primary-700 text-3xl font-semibold;
+		@apply text-primary-300 text-3xl font-semibold;
 	}
 
 	h2 {
-		@apply text-primary-700 text-lg font-semibold;
+		@apply text-primary-300 text-lg font-semibold;
 	}
 
 	.link {
-		@apply text-primary-800 underline;
+		@apply text-primary-600 underline;
 	}
 </style>

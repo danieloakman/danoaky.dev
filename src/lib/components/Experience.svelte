@@ -8,7 +8,7 @@
 </script>
 
 <Section title="Experience">
-	{#each EXPERIENCE as { summary, description, roles, company, url, skills, links }}
+	{#each EXPERIENCE as { summary, description, roles, company, url, skills, links } (description)}
 		{@const lastRole = roles[0]}
 		{@const firstRole = roles.at(-1)}
 		{@const { start, end } = formatStartEndDates(
@@ -29,7 +29,7 @@
 			{#snippet extra()}
 				{#if links}
 					<div class="flex flex-wrap gap-2">
-						{#each links as link}
+						{#each links as link (link.url)}
 							<Link href={link.url} target="_blank" intent="attachment">{link.title}</Link>
 						{/each}
 					</div>
