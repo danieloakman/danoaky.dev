@@ -1,5 +1,5 @@
 #! bun
-import { Dayjs, sh, Result } from '@danoaky/js-utils';
+import { Dayjs, Result, sh } from '@danoaky/js-utils';
 import chokidar from 'chokidar';
 import { readFileSync, writeFileSync } from 'fs';
 import { cp } from 'fs/promises';

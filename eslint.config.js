@@ -22,8 +22,7 @@ export default ts.config(
 			globals: { ...globals.browser, ...globals.node }
 		},
 		rules: {
-			'no-undef': 'off',
-			'svelte/no-navigation-without-resolve': 'off'
+			'no-undef': 'off'
 		}
 	},
 	{

@@ -1,4 +1,5 @@
 <script lang="ts" module>
+	import { resolve } from '$app/paths';
 	import { PROJECTS } from '$lib/assets/content';
 	import { domain } from '$lib/utils/url';
 
@@ -29,6 +30,8 @@
 	{/each}
 
 	{#snippet bottom()}
-		<Link class="text-xl" href="./projects" intent="internal">View Full Project Archive</Link>
+		<Link class="text-xl" href={resolve('/projects')} intent="internal">
+			View Full Project Archive
+		</Link>
 	{/snippet}
 </Section>

@@ -27,6 +27,7 @@
 	const { href, Icon } = $derived(MAP[type]);
 </script>
 
+<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
 <a in:blur {href} target="_blank">
 	<Icon
 		class="w-8 h-8 hover:stroke-primary-500 hover:translate-y-[-4px] hover:animate-pulse transition-all duration-300 {klass}"

@@ -2,6 +2,7 @@
 	import { ArrowLeft, ChevronUp } from '@lucide/svelte';
 	import { fly } from 'svelte/transition';
 
+	import { resolve } from '$app/paths';
 	import { PROJECTS } from '$lib/assets/content';
 	import Badge from '$lib/components/Badge.svelte';
 	import Link from '$lib/components/Link.svelte';
@@ -14,7 +15,9 @@
 <main
 	class="flex flex-col justify-center gap-4 min-h-screen max-w-7xl p-4 transition-all duration-300 mx-auto"
 >
-	<a href="/" class="self-start flex gap-2 items-center anchor"><ArrowLeft />Daniel Brown</a>
+	<a href={resolve('/')} class="self-start flex gap-2 items-center anchor"
+		><ArrowLeft />Daniel Brown</a
+	>
 	<h1 class="h2 font-bold self-start text-preset-gradient-one">All Projects</h1>
 
 	<div class="table-wrap">

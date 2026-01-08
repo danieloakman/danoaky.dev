@@ -23,6 +23,7 @@
 {#snippet subSection({ title, content, href }: { title?: string; content: string; href?: string })}
 	<div>
 		{#if title}
+			<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
 			<a {href}><b>{title}</b></a>
 		{/if}
 		<p class="leading-tight">{content}</p>
@@ -50,7 +51,7 @@
 						{#if lastRole}
 							{@const { start, end } = formatStartEndDates(lastRole.start, lastRole.end)}
 							<h3 class="flex gap-1 items-end text-[11px]">
-								{lastRole.title} - <a href={url}><b class="font-semibold">{company}</b></a>
+								{lastRole.title} - <a href={url} target="_blank"><b class="font-semibold">{company}</b></a>
 								<p class="text-xxs opacity-60">{start} - {end}</p>
 							</h3>
 						{/if}
