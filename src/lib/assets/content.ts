@@ -214,6 +214,11 @@ export const SKILLS = {
 		type: 'framework',
 		years: calcYears('2025-')
 	},
+	fastApi: {
+		name: 'FastAPI',
+		type: 'framework',
+		years: calcYears('2021')
+	},
 	postgresql: {
 		name: 'PostgreSQL',
 		type: 'platform',
@@ -313,6 +318,16 @@ export const SKILLS = {
 		name: 'Flowise',
 		type: 'library',
 		years: calcYears('2025-')
+	},
+	langChain: {
+		name: 'LangChain',
+		type: 'library',
+		years: calcYears('2025-')
+	},
+	langGraph: {
+		name: 'LangGraph',
+		type: 'library',
+		years: calcYears('2025-')
 	}
 } satisfies Record<string, Skill>;
 
@@ -329,14 +344,16 @@ export const EXPERIENCE: Experience[] = [
 		],
 		type: 'full-time',
 		description: [
-			'Development of AI powered assistants to help automate tasks and processes.',
-			'Utilise the latest AI models and tools with n8n and Flowise.',
-			'Migration of large legacy codebases to take advantage of newer tools and platforms like n8n.'
+			'Design and build LLM-powered assistants and agentic workflows (LangChain, LangGraph, n8n, Flowise) for task and process automation in production.',
+			'Delivered hands-on solutions with LLMs and agentic systems: RAG, tool/function calling, and planning.',
+			'FastAPI, advanced RAG techniques, LLM context management and safety guardrails.',
+			'Integrate and operate advanced AI models with a focus on scalable, reliable delivery.',
+			// 'Migration of large legacy codebases to modern AI-enabled platforms.'
 		],
 		summary:
-			'Development of AI-powered assistants for task automation using modern AI models and tools (n8n, Flowise), and migration of legacy codebases to modern platforms.',
+			'Designing and operating production-grade AI systems: LLM-powered assistants and agentic workflows for intelligent automation (LangChain, LangGraph, n8n, Flowise), plus migration of legacy systems to scalable AI-enabled platforms.',
 		location: 'Australia (remote)',
-		skills: selectSkills('TS', 'AI', 'n8n', 'flowise', 'awsTextract', 'postgresql'),
+		skills: selectSkills('TS', 'python', 'AI', 'fastApi', 'langChain', 'langGraph', 'n8n', 'flowise', 'awsTextract', 'postgresql'),
 		url: 'https://www.futuresecure.ai'
 	},
 	{
@@ -350,12 +367,11 @@ export const EXPERIENCE: Experience[] = [
 		],
 		type: 'full-time',
 		description: [
-			'Development of mobile apps using React Native.',
+			'Development of mobile apps using React Native and React Native Reanimated with gestures.',
 			'Integrating and optimising video streaming in mobile apps.',
 			'Maintenance and deployment of mobile apps for iOS and Android.',
 			'Developing with a large number of users and network requests in mind.',
 			'Usage of mobile specialised continuous integration utilities and services.',
-			'Mobile gestures and animations.',
 			'Development of Server Side Rendered NextJS web apps.',
 			'Containerisation of web app stacks using Docker and docker compose configurations.'
 		],
@@ -396,14 +412,13 @@ export const EXPERIENCE: Experience[] = [
 		],
 		type: 'full-time',
 		description: [
-			'Maintenance and improvement of an established and large code base.',
-			'Extended application of Typescript and web developer based technology, to consistently meet client needs.',
-			'Regular exposure to continuous integration tools and development techniques.',
-			'Reviewed and trained team of junior developer performance and code.',
-			'Implemented automated tests using Playwright to ensure application reliability and quality.'
+			'Maintenance and improvement of an established, large-scale codebase.',
+			'Extended application of TypeScript and web technologies to consistently meet client needs.',
+			'CI/CD and continuous integration practices; automated tests (Playwright) for reliability and quality.',
+			'Led code reviews and mentored junior developers; supported team performance and code health.'
 		],
 		summary:
-			'Senior role focused on maintaining and enhancing a large-scale codebase using TypeScript and modern web technologies. Led code reviews and mentored junior developers while implementing continuous integration practices. Consistently delivered high-quality solutions that met client requirements through effective use of React, Node.js, and automated testing frameworks.',
+			'Senior role maintaining and enhancing large-scale codebases with TypeScript and modern web tech. Led code reviews and mentored junior developers; applied CI/CD and automated testing (Playwright) for production quality. Delivered against client requirements with strong focus on reliability and maintainability.',
 		location: 'Australia (remote)',
 		skills: selectSkills('TS', 'react', 'node', 'AI', 'mocha', 'playwright', 'pnpm'),
 		url: 'https://www.tiny.cloud',
@@ -441,9 +456,9 @@ export const EXPERIENCE: Experience[] = [
 		],
 		type: 'contract',
 		description: [
-			'Providing strategic direction and technical advice to support and guide existing project operations.',
-			'Guiding design pattern decisions to optimise efficiency, readability and ease of maintenance.',
-			'Continued high level application of Python, Typescript & Node, including mentorship of staff.'
+			'Strategic direction and technical advice for existing project operations and roadmaps.',
+			'Guiding design pattern decisions to optimise efficiency, readability and maintainability.',
+			'High-level application of Python, TypeScript & Node; mentorship and cross-functional alignment with engineering and stakeholders.'
 		],
 		location: 'Wollongong NSW (remote)',
 		url: 'https://auxilis.com',
@@ -506,19 +521,15 @@ export const EXPERIENCE: Experience[] = [
 		type: 'full-time',
 		description: [
 			'Advanced use of Javascript, Typescript, Python & NodeJS to deliver web-apps and serverless backends.',
-			'Experience working in a startup environment.',
-			'Regular communication with internal executives and external stakeholders.',
+			'Experience working in a startup environment in Agile delivery; regular communication with internal executives and external stakeholders.',
 			'Utilised Typescript & Node to deliver scalable backend architectures & microservices.',
-			// 'Advanced knowledge of pricing and awareness of costs in an application that requires IDP.',
-			'Experience in tutoring, mentoring and career development of other developers, clients and stakeholders.',
-			'Engagement and experience with remote team members, experience presenting complex projects to stakeholders in a remote environment.',
-			// 'Prompt delivery against internal and external timeframes, adaptive project management to exceed expectations.',
-			'Utilised AI driven solutions to parse complex OCR from documents.',
-			'Experience gained in Prisma backend and GraphQL.',
-			'Implemented end-to-end tests using Playwright as well as web-scraping utilities.'
+			'Led and mentored developers; tutoring, career development and cross-functional collaboration with Product, Engineering and Operations.',
+			'Presented complex technical projects to stakeholders and remote teams.',
+			'Designed and operated production AI-driven document processing (IDP) solutions for complex OCR and extraction at scale.',
+			'Prisma backend and GraphQL; end-to-end tests (Playwright) and quality practices for production reliability.'
 		],
 		summary:
-			'Progressive career growth from Trainee to Team Lead in Intelligent Document Processing, specializing in AI-driven OCR solutions, scalable microservices, and stakeholder management in a startup environment. Developed full-stack applications using TypeScript, Python, and Node.js, with expertise in building scalable backend architectures and microservices. Led remote teams, managed stakeholder relationships, and delivered AI-powered document processing solutions while mentoring developers and managing complex projects within tight timeframes.',
+			'Progressive career growth from Trainee to Team Lead (2+ years leading) in Intelligent Document Processing. Designed and operated production-grade AI systems for document processing; built scalable microservices and backends in TypeScript, Python, and Node.js. Led remote teams, drove cross-functional collaboration, and delivered within Agile timeframes while mentoring developers and managing stakeholder communication.',
 		location: 'Wollongong NSW',
 		skills: selectSkills(
 			'TS',
@@ -526,10 +537,13 @@ export const EXPERIENCE: Experience[] = [
 			'react',
 			'aws',
 			'node',
+			'python',
+			'fastApi',
+			'AI',
+			'ocr',
 			'mocha',
 			'playwright',
 			'pnpm',
-			'python',
 			'golang'
 		),
 		url: 'https://auxilis.com'
@@ -544,7 +558,7 @@ export const EDUCATION: Education[] = [
 		end: new Date('2020-06-01')
 	},
 	{
-		institution: 'AWS Technical and Certification',
+		institution: 'AWS',
 		award: 'AWS Partner: Accreditation (Technical)',
 		end: new Date('2019-01-31')
 	},
@@ -572,7 +586,7 @@ export const PROJECTS: Project[] = [
 		madeAt: 'FrogCo',
 		date: new Date('2025-03-01'),
 		description:
-			'A NextJS web app for creating, managing and distributing targeted email campaigns containing AI generated videos of sport celebrities and athletes.',
+			'A NextJS web app for creating, managing and distributing targeted email campaigns with LLM and AI-generated video content (sport celebrities and athletes).',
 		image: 'playai',
 		url: 'https://www.playai.co',
 		skills: selectSkills(
@@ -705,7 +719,7 @@ export const PROJECTS: Project[] = [
 	{
 		name: 'Extractly - Validate',
 		description:
-			'A web app tool to help financial auditors validate documents. In particular Annual Financial Statements and reports. It was used to parse and extract all data from these documents, such as tables and figures. Perform checks on the data extracted to ensure it is correct and consistent. Then provide a report of the results in a web app to speed up the auditors process.',
+			'Production AI/ML-powered validation tool for financial auditors (Annual Financial Statements and reports). Parses and extracts data (tables, figures), runs consistency checks, and delivers reports in a web app. Built with AWS (Lambda, Textract), OCR pipelines and automated quality checks.',
 		date: new Date('2021-05-01'),
 		madeAt: 'Auxilis',
 		image: 'extractly-validate',
