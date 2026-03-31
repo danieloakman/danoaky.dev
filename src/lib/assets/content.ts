@@ -346,14 +346,14 @@ export const EXPERIENCE: Experience[] = [
 		description: [
 			'Design and build LLM-powered assistants and agentic workflows (LangChain, LangGraph, n8n, Flowise) for task and process automation in production.',
 			'Delivered hands-on solutions with LLMs and agentic systems: RAG, tool/function calling, and planning.',
-			'FastAPI, advanced RAG techniques, LLM context management and safety guardrails.',
+			'Advanced RAG techniques, LLM context management and safety guardrails.',
 			'Integrate and operate advanced AI models with a focus on scalable, reliable delivery.',
 			// 'Migration of large legacy codebases to modern AI-enabled platforms.'
 		],
 		summary:
 			'Designing and operating production-grade AI systems: LLM-powered assistants and agentic workflows for intelligent automation (LangChain, LangGraph, n8n, Flowise), plus migration of legacy systems to scalable AI-enabled platforms.',
 		location: 'Australia (remote)',
-		skills: selectSkills('TS', 'python', 'AI', 'fastApi', 'langChain', 'langGraph', 'n8n', 'flowise', 'awsTextract', 'postgresql'),
+		skills: selectSkills('TS', 'python', 'AI', 'langChain', 'langGraph', 'n8n', 'flowise', 'awsTextract', 'postgresql'),
 		url: 'https://www.futuresecure.ai'
 	},
 	{

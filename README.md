@@ -29,7 +29,7 @@ You can preview the production build with `bun preview`.
 
 ## Deploying
 
-Merging to main will trigger a deployment to Cloudflare Workers which pushes the latest changes in main to [danoaky.dev][https://danoaky.dev].
+Merging to main will trigger a deployment to Cloudflare Workers which pushes the latest changes in main to [danoaky.dev](https://danoaky.dev).
 
 ## Generating Resume
 
