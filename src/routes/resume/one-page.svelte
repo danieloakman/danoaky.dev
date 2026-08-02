@@ -1,0 +1,227 @@
+<script lang="ts">
+	import { EDUCATION, EXPERIENCE, PROJECTS, SKILLS } from '$lib/assets/content';
+	import type { Skill } from '$lib/types';
+	import { formatStartEndDates } from '$lib/utils/dates';
+
+	const {
+		'programming-language': languages,
+		framework: frameworks,
+		library: libraries,
+		tool: tools,
+		platform: platforms
+	} = Object.values(SKILLS).reduce(
+		(acc, skill) => {
+			acc[skill.type] = [...(acc[skill.type] ?? []), skill];
+			return acc;
+		},
+		{} as Record<Skill['type'], Skill[]>
+	);
+
+	const skillByYears = (a: Skill, b: Skill) => b.years - a.years;
+</script>
+
+{#snippet subSection({ title, content, href }: { title?: string; content: string; href?: string })}
+	<div>
+		{#if title}
+			<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
+			<a {href}><b>{title}</b></a>
+		{/if}
+		<p class="leading-tight">{content}</p>
+	</div>
+{/snippet}
+
+<main class="row p-7 text-xxs h-screen">
+	<section class="col flex-2">
+		<a href="https://danoaky.dev" class="anchor"><h1>Daniel Brown</h1></a>
+
+		<p>
+			Experienced Senior Software Engineer with a passion for building performant, scalable digital
+			experiences for the web and mobile.
+		</p>
+
+		<h2><a href="https://danoaky.dev#EXPERIENCE">Experience</a></h2>
+
+		<div class="col">
+			{#each EXPERIENCE as { company, roles, description, url } (company)}
+				{@const rolesCopy = roles.slice()}
+				{@const lastRole = rolesCopy.shift()}
+
+				<div class="flex flex-col gap-1">
+					<div class="flex flex-col">
+						{#if lastRole}
+							{@const { start, end } = formatStartEndDates(lastRole.start, lastRole.end)}
+							<h3 class="flex gap-1 items-end text-[11px]">
+								{lastRole.title} -
+								<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
+								<a href={url} target="_blank"><b class="font-semibold">{company}</b></a>
+								<p class="text-xxs opacity-60">{start} - {end}</p>
+							</h3>
+						{/if}
+						{#each rolesCopy as role (role.title)}
+							{@const { start, end } = formatStartEndDates(role.start, role.end)}
+							<h3 class="flex gap-2 items-end text-[11px]">
+								{role.title}
+								<p class="text-xxs opacity-60">{start} - {end}</p>
+							</h3>
+						{/each}
+					</div>
+
+					<ul class="pl-6 flex flex-col list-disc text-[9.5px]">
+						{#each description as description (description)}
+							<li>{description}</li>
+						{/each}
+					</ul>
+				</div>
+			{/each}
+
+			<!-- <a class="link" href="https://danoaky.dev#EXPERIENCE">View all my experience</a> -->
+
+			<h2>Volunteering</h2>
+			<p>
+				Active WIRES volunteer, certified for Rescue and Immediate Care (native wildlife) and
+				Identification and Treatment of wombat mange. Passionate about helping native wildlife,
+				providing education to the community and assisting with wider population conservation
+				projects.
+			</p>
+
+			<h2>Interests</h2>
+			<p>
+				Outside of coding, I enjoy photography, playing video games, snowboarding, rock climbing and
+				spending time with my wonderful wife and dog.
+			</p>
+		</div>
+	</section>
+
+	<section class="col flex-1 vr border-primary-500 ps-4">
+		<ul class="flex flex-col gap-0">
+			<li>
+				<a class="link" href="mailto:doakman94@gmail.com">doakman94@gmail.com</a>
+			</li>
+			<li>
+				<a class="link" href="tel:0411032732">0411032732</a>
+			</li>
+			<li>
+				<a class="link" href="https://danoaky.dev">danoaky.dev (Portfolio Website)</a>
+			</li>
+			<li>
+				<a class="link" href="https://github.com/danieloakman">github.com/danieloakman</a>
+			</li>
+			<li>
+				<a class="link" href="https://www.linkedin.com/in/daniel-brown-7676161a0/">
+					linkedin.com/in/daniel-brown-7676161a0/
+				</a>
+			</li>
+			<li>
+				<a class="link" href="https://www.npmjs.com/~danoaky">npmjs.com/~danoaky</a>
+			</li>
+
+			<br />
+
+			<li>Wollongong, NSW</li>
+			<li>Working rights: Australian Citizen</li>
+		</ul>
+
+		<div class="flex flex-col gap-2">
+			<h2>Skills</h2>
+
+			{@render subSection({
+				title: 'Strongest languages',
+				content: languages
+					.slice(0, 4)
+					.map(({ name, years }) => `${years} years in ${name}`)
+					.join(', ')
+			})}
+
+			{@render subSection({
+				title: 'Other Known Languages',
+				content: languages
+					.slice(4)
+					.sort(skillByYears)
+					.map(({ name }) => name)
+					.join(', ')
+			})}
+
+			{@render subSection({
+				title: 'Libraries & Frameworks',
+				content: libraries
+					.concat(frameworks)
+					.sort(skillByYears)
+					.filter(({ years }) => years > 2)
+					.map(({ name }) => name)
+					.join(', ')
+			})}
+
+			{@render subSection({
+				title: 'Tools & Platforms',
+				content: platforms
+					.concat(tools)
+					.sort(skillByYears)
+					.filter(({ years }) => years > 2)
+					.map(({ name }) => name)
+					.join(', ')
+			})}
+		</div>
+
+		<div class="flex flex-col gap-2">
+			<h2><a href="https://danoaky.dev/projects">Selected Projects</a></h2>
+
+			{#each PROJECTS.filter(({ selected }) => selected).slice(0, 4) as { name, madeAt, description, url } (name)}
+				{@render subSection({
+					title: `${name}${madeAt === 'Personal' ? '' : ` - ${madeAt}`}`,
+					content: description,
+					href: url
+				})}
+			{/each}
+
+			<a class="link" href="https://danoaky.dev/projects">View all my projects</a>
+		</div>
+
+		<div class="flex flex-col gap-2">
+			<h2>Education</h2>
+
+			{#each EDUCATION as { institution, award, end } (institution)}
+				{@render subSection({
+					title: institution,
+					content: `${award}${end ? ` - ${end.getFullYear()}` : ''}`
+				})}
+			{/each}
+		</div>
+	</section>
+
+	<footer class="absolute bottom-1 right-1">
+		<a
+			class="link"
+			href="https://github.com/danieloakman/danoaky.dev?tab=readme-ov-file#generating-resume"
+		>
+			Generated on {new Date().toLocaleDateString('en-AU', { timeZone: 'Australia/Sydney' })}
+		</a>
+	</footer>
+</main>
+
+<style lang="postcss">
+	@reference '../../app.css';
+
+	.col {
+		@apply flex flex-col gap-2;
+	}
+
+	.row {
+		@apply flex flex-row gap-2;
+	}
+
+	.text-xxs {
+		@apply text-xs text-[10px];
+	}
+
+	h1 {
+		@apply text-primary-300 text-3xl font-semibold;
+	}
+
+	h2 {
+		@apply text-primary-300 text-lg font-semibold;
+	}
+
+	.link {
+		@apply text-primary-600 underline;
+	}
+</style>

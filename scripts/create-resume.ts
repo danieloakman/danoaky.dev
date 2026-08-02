@@ -14,7 +14,9 @@ const setDataMode = (mode: 'light' | 'dark') => {
 };
 
 async function createResume(output: string) {
-	await sh(`bun playwright pdf "http://localhost:5173/resume" "${output}"`).then(Result.unwrap);
+	await sh(
+		`bun playwright pdf --paper-format A4 "http://localhost:5173/resume" "${output}"`
+	).then(Result.unwrap);
 	const date = Dayjs().local().format('YYYY-MM-DD');
 	await cp(output, path.join(tmpdir(), `DJB_Resume_${date}.pdf`));
 }
@@ -54,6 +56,7 @@ if (import.meta.main) {
 	if (cli.flags.watch) {
 		const watcher = chokidar.watch([
 			path.join(import.meta.dir, '../src/routes/resume/+page.svelte'),
+			path.join(import.meta.dir, '../src/routes/resume/one-page.svelte'),
 			path.join(import.meta.dir, '../src/lib/assets/content.ts')
 		]);
 		watcher.on('change', async () => {
