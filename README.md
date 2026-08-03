@@ -35,11 +35,13 @@ Merging to main will trigger a deployment to Cloudflare Workers which pushes the
 
 The [resume.pdf](./static/resume.pdf) file is captured/generated using Playwright. Playwright looks at the _/resume_ route, which can't be accessed in production.
 
+With the dev server already running (`bun dev`):
+
 ```bash
-bun dev &
-sleep 5
 bun create-resume -w
 ```
+
+Omit `-w` for a one-shot capture.
 
 ## Inspiration
 
