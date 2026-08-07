@@ -14,7 +14,7 @@
 		"lint": "prettier --check . && eslint .",
 		"test:unit": "vitest",
 		"test": "npm run test:unit -- --run",
-		"upgrade-interactive": "bunx npm-check-updates -i",
+		"upgrade-interactive": "bunx npm-check-updates -i -c 7",
 		"create-resume": "bun run scripts/create-resume.ts"
 	},
 	"engines": {
