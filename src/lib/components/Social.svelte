@@ -1,22 +1,22 @@
 <script lang="ts" module>
-	import { Github, Instagram, Linkedin } from '@lucide/svelte';
+	import type { Component } from 'svelte';
 	import { blur } from 'svelte/transition';
+
+	import GithubIcon from './icons/Github.svelte';
+	import LinkedinIcon from './icons/Linkedin.svelte';
 
 	export interface Props {
 		class?: string;
 		type: 'github' | 'linkedin';
 	}
-	const MAP: Record<
-		Props['type'],
-		{ href: string; Icon: typeof Github | typeof Linkedin | typeof Instagram }
-	> = {
+	const MAP: Record<Props['type'], { href: string; Icon: Component<{ class?: string }> }> = {
 		github: {
 			href: 'https://github.com/danieloakman',
-			Icon: Github
+			Icon: GithubIcon
 		},
 		linkedin: {
 			href: 'https://www.linkedin.com/in/daniel-brown-7676161a0/',
-			Icon: Linkedin
+			Icon: LinkedinIcon
 		}
 	};
 </script>
