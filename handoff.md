@@ -34,14 +34,14 @@ Auxilis full-time was moved to page 2 after bullets were clipped by page 1’s f
 
 ## Key files
 
-| Path | Role |
-|------|------|
-| `src/routes/resume/+page.svelte` | Live 2-page layout |
-| `src/routes/resume/one-page.svelte` | Archived 1-page layout |
-| `src/routes/resume/+page.server.ts` | Prod 404 gate |
-| `src/lib/assets/content.ts` | Experience / skills / projects data |
-| `scripts/create-resume.ts` | Playwright PDF → `static/resume.pdf` |
-| `svelte.config.js` | `handleHttpError` swallows `/resume` prerender 404 |
+| Path                                | Role                                               |
+| ----------------------------------- | -------------------------------------------------- |
+| `src/routes/resume/+page.svelte`    | Live 2-page layout                                 |
+| `src/routes/resume/one-page.svelte` | Archived 1-page layout                             |
+| `src/routes/resume/+page.server.ts` | Prod 404 gate                                      |
+| `src/lib/assets/content.ts`         | Experience / skills / projects data                |
+| `scripts/create-resume.ts`          | Playwright PDF → `static/resume.pdf`               |
+| `svelte.config.js`                  | `handleHttpError` swallows `/resume` prerender 404 |
 
 ## Suggested skills
 

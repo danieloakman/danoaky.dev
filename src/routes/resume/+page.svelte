@@ -71,8 +71,8 @@
 		<header class="flex flex-col gap-2">
 			<a href="https://danoaky.dev" class="anchor"><h1>Daniel Brown</h1></a>
 			<p class="text-[13px] leading-snug max-w-[55ch]">
-				Experienced Senior Software Engineer with a passion for building performant, scalable digital
-				experiences for the web and mobile.
+				Experienced Senior Software Engineer with a passion for building performant, scalable
+				digital experiences for the web and mobile.
 			</p>
 			<p class="contact">
 				<a class="link" href="mailto:doakman94@gmail.com">doakman94@gmail.com</a>
@@ -211,7 +211,7 @@
 		box-sizing: border-box;
 		width: 210mm;
 		height: 297mm;
-		@apply relative mx-auto bg-white p-8 text-[12px] overflow-hidden;
+		@apply relative mx-auto overflow-hidden bg-white p-8 text-[12px];
 	}
 
 	.col {
@@ -223,15 +223,15 @@
 	}
 
 	.page-label {
-		@apply text-[11px] text-primary-300/70 tracking-wide -mb-2;
+		@apply text-primary-300/70 -mb-2 text-[11px] tracking-wide;
 	}
 
 	h1 {
-		@apply text-primary-300 text-4xl font-semibold leading-none;
+		@apply text-primary-300 text-4xl leading-none font-semibold;
 	}
 
 	h2 {
-		@apply text-primary-300 text-lg font-semibold border-b border-primary-300/70 pb-0.5;
+		@apply text-primary-300 border-primary-300/70 border-b pb-0.5 text-lg font-semibold;
 	}
 
 	.link {
@@ -257,11 +257,11 @@
 	}
 
 	.experience-cell {
-		@apply pb-1.5 border-b border-neutral-300;
+		@apply border-b border-neutral-300 pb-1.5;
 	}
 
 	.experience-cell:nth-child(even) {
-		@apply pl-2.5 border-l border-primary-200;
+		@apply border-primary-200 border-l pl-2.5;
 	}
 
 	.education-grid {
