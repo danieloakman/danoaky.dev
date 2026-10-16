@@ -581,6 +581,17 @@ export const EDUCATION: Education[] = [
 
 export const PROJECTS: Project[] = [
 	{
+		name: 'ai-quiz',
+		description:
+			'Research any subject into a local fact bank, then play agent-authored quizzes in chat or a local web UI. A researcher agent gathers facts through a CLI; a quiz host samples that bank and writes multiple-choice, yes/no, and freeform rounds with an OpenAI-compatible LLM or the Cursor Agent SDK.',
+		date: new Date('2026-10-01'),
+		madeAt: 'Personal',
+		skills: selectSkills('python', 'fastApi', 'nix', 'AI'),
+		image: 'ai-quiz',
+		url: 'https://github.com/danieloakman/ai-quiz',
+		selected: true
+	},
+	{
 		name: 'Polyphasic Sleep Manager',
 		description:
 			'An iOS app written in React-Native to help manage a polyphasic sleep schedule with your own personal schedule. Integrates with your phone’s calendar to see where you can fit in naps during the day and how to best fit in your sleep schedule.',
@@ -608,8 +619,7 @@ export const PROJECTS: Project[] = [
 			'fastify',
 			'docker',
 			'aws'
-		),
-		selected: true
+		)
 	},
 	{
 		name: 'FrogBox Play',
