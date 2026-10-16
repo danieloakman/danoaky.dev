@@ -24,3 +24,4 @@ vite.config.ts.timestamp-*
 
 .direnv
 mprocs.log
+.playwright-cli
