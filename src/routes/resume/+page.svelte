@@ -71,8 +71,8 @@
 		<header class="flex flex-col gap-2">
 			<a href="https://danoaky.dev" class="anchor"><h1>Daniel Brown</h1></a>
 			<p class="text-[13px] leading-snug max-w-[55ch]">
-				Experienced Senior Software Engineer with a passion for building performant, scalable
-				digital experiences for the web and mobile.
+				Senior Software Engineer focused on production AI systems (LLM assistants, agentic
+				workflows, and RAG), alongside performant, scalable web and mobile experiences.
 			</p>
 			<p class="contact">
 				<a class="link" href="mailto:doakman94@gmail.com">doakman94@gmail.com</a>
@@ -102,7 +102,7 @@
 	</section>
 
 	<section class="page col page-2">
-		<p class="page-label">Daniel Brown — page 2</p>
+		<p class="page-label">Daniel Brown - page 2</p>
 
 		<div class="col gap-2">
 			<h2>Skills</h2>

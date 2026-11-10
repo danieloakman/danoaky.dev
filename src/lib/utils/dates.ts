@@ -34,7 +34,5 @@ export function formatStartEndDates(start: Date, end?: Date, format: 'long' | 's
 	}
 
 	const endStr = end ? `${endMonth} ${endYear}` : 'Present';
-	return startYear === endYear
-		? { start: startMonth, end: endStr }
-		: { start: `${startMonth} ${startYear}`, end: endStr };
+	return { start: `${startMonth} ${startYear}`, end: endStr };
 }

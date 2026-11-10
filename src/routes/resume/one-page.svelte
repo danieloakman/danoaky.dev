@@ -35,8 +35,8 @@
 		<a href="https://danoaky.dev" class="anchor"><h1>Daniel Brown</h1></a>
 
 		<p>
-			Experienced Senior Software Engineer with a passion for building performant, scalable digital
-			experiences for the web and mobile.
+			Senior Software Engineer focused on production AI systems (LLM assistants, agentic workflows,
+			and RAG), alongside performant, scalable web and mobile experiences.
 		</p>
 
 		<h2><a href="https://danoaky.dev#EXPERIENCE">Experience</a></h2>

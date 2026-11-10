@@ -344,11 +344,11 @@ export const EXPERIENCE: Experience[] = [
 		],
 		type: 'full-time',
 		description: [
-			'Design and build LLM-powered assistants and agentic workflows (LangChain, LangGraph, n8n, Flowise) for task and process automation in production.',
-			'Delivered hands-on solutions with LLMs and agentic systems: RAG, tool/function calling, and planning.',
-			'Advanced RAG techniques, LLM context management and safety guardrails.',
-			'Integrate and operate advanced AI models with a focus on scalable, reliable delivery.'
-			// 'Migration of large legacy codebases to modern AI-enabled platforms.'
+			'Design and build production LLM-powered assistants and multi-agent workflows (LangChain, LangGraph, n8n, Flowise) for task and process automation.',
+			'Implement RAG pipelines, tool/function calling, and agent planning so models can retrieve grounded context and take reliable actions.',
+			'Apply advanced RAG techniques, LLM context management, and safety guardrails for controllable, production-ready model behaviour.',
+			'Integrate and operate advanced AI models (including document AI / AWS Textract) with a focus on scalable, reliable delivery.',
+			'Migrate and modernise legacy systems toward AI-enabled platforms and intelligent automation.'
 		],
 		summary:
 			'Designing and operating production-grade AI systems: LLM-powered assistants and agentic workflows for intelligent automation (LangChain, LangGraph, n8n, Flowise), plus migration of legacy systems to scalable AI-enabled platforms.',
