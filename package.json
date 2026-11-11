@@ -1,7 +1,6 @@
 {
 	"name": "danoaky.dev",
 	"private": true,
-	"version": "0.0.1",
 	"type": "module",
 	"scripts": {
 		"dev": "vite dev --host",
@@ -22,8 +21,8 @@
 	},
 	"dependencies": {
 		"@danoaky/js-utils": "^0.31.1",
-		"@playwright/test": "1.62",
-		"playwright-core": "1.62"
+		"@playwright/test": "1.62.1",
+		"playwright-core": "1.62.1"
 	},
 	"devDependencies": {
 		"@eslint/compat": "^2.1.0",
