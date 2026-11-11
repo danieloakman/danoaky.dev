@@ -22,9 +22,11 @@
 
 {#snippet subSection({ title, content, href }: { title?: string; content: string; href?: string })}
 	<div>
-		{#if title}
+		{#if title && href}
 			<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
-			<a {href}><b>{title}</b></a>
+			<a class="link" {href}><b>{title}</b></a>
+		{:else if title}
+			<b>{title}</b>
 		{/if}
 		<p class="leading-normal">{content}</p>
 	</div>
@@ -43,7 +45,7 @@
 						<h3 class="flex flex-wrap gap-x-1 items-end text-[13px]">
 							{lastRole.title} -
 							<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
-							<a href={url}><b class="font-semibold">{company}</b></a>
+							<a class="link" href={url}><b class="font-semibold">{company}</b></a>
 							<span class="text-[12px] opacity-60">{start} - {end}</span>
 						</h3>
 					{/if}
@@ -156,7 +158,7 @@
 		</div>
 
 		<div class="col gap-2">
-			<h2><a href="https://danoaky.dev/projects">Selected Projects</a></h2>
+			<h2>Selected Projects</h2>
 			{#each PROJECTS.filter(({ selected }) => selected).slice(0, 4) as { name, madeAt, description, url } (name)}
 				{@render subSection({
 					title: `${name}${madeAt === 'Personal' ? '' : ` - ${madeAt}`}`,
@@ -234,16 +236,27 @@
 		@apply text-primary-300 border-primary-300/70 border-b pb-0.5 text-lg font-semibold;
 	}
 
-	.link {
-		@apply text-primary-600 underline;
+	/* Gold like section headers, underline so they still read as links */
+	a,
+	a.link {
+		color: var(--color-primary-300);
+		text-decoration: underline solid color-mix(in oklab, var(--color-primary-300) 75%, transparent);
+		text-decoration-thickness: 1.5px;
+		text-underline-offset: 2px;
+	}
+
+	a.anchor {
+		text-decoration: none;
+	}
+
+	a.anchor h1 {
+		text-decoration: underline solid color-mix(in oklab, var(--color-primary-300) 55%, transparent);
+		text-decoration-thickness: 1.5px;
+		text-underline-offset: 4px;
 	}
 
 	.contact {
 		@apply flex flex-wrap items-center gap-x-1.5 gap-y-0.5 text-[12px] leading-snug;
-	}
-
-	.contact a {
-		@apply text-primary-600 underline;
 	}
 
 	.contact span[aria-hidden='true'] {

@@ -22,9 +22,11 @@
 
 {#snippet subSection({ title, content, href }: { title?: string; content: string; href?: string })}
 	<div>
-		{#if title}
+		{#if title && href}
 			<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
-			<a {href}><b>{title}</b></a>
+			<a class="link" {href}><b>{title}</b></a>
+		{:else if title}
+			<b>{title}</b>
 		{/if}
 		<p class="leading-tight">{content}</p>
 	</div>
@@ -53,7 +55,7 @@
 							<h3 class="flex gap-1 items-end text-[11px]">
 								{lastRole.title} -
 								<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
-								<a href={url} target="_blank"><b class="font-semibold">{company}</b></a>
+								<a class="link" href={url} target="_blank"><b class="font-semibold">{company}</b></a>
 								<p class="text-xxs opacity-60">{start} - {end}</p>
 							</h3>
 						{/if}
@@ -163,7 +165,7 @@
 		</div>
 
 		<div class="flex flex-col gap-2">
-			<h2><a href="https://danoaky.dev/projects">Selected Projects</a></h2>
+			<h2>Selected Projects</h2>
 
 			{#each PROJECTS.filter(({ selected }) => selected).slice(0, 4) as { name, madeAt, description, url } (name)}
 				{@render subSection({
@@ -221,7 +223,22 @@
 		@apply text-primary-300 text-lg font-semibold;
 	}
 
-	.link {
-		@apply text-primary-600 underline;
+	/* Gold like section headers, underline so they still read as links */
+	a,
+	a.link {
+		color: var(--color-primary-300);
+		text-decoration: underline solid color-mix(in oklab, var(--color-primary-300) 75%, transparent);
+		text-decoration-thickness: 1.5px;
+		text-underline-offset: 2px;
+	}
+
+	a.anchor {
+		text-decoration: none;
+	}
+
+	a.anchor h1 {
+		text-decoration: underline solid color-mix(in oklab, var(--color-primary-300) 55%, transparent);
+		text-decoration-thickness: 1.5px;
+		text-underline-offset: 4px;
 	}
 </style>
