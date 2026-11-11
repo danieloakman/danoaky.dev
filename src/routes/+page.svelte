@@ -19,20 +19,19 @@
 	<main class="flex flex-1 flex-col gap-20 md:gap-30 py-4 md:py-8 mt-20 md:mt-0">
 		<Section title="About">
 			<p>
-				I'm a Senior Software Engineer with a passion for building robust fullstack web and mobile
-				applications that deliver real impact. My expertise lies in crafting scalable solutions,
-				from developing engaging React Native mobile experiences to architecting server-side
-				rendered Next.js web apps and microservices. I thrive on tackling complex challenges,
-				optimizing performance for large user bases, and ensuring seamless integration across
-				diverse platforms.
+				I'm a Senior Software Engineer focused on production AI systems: LLM assistants, agentic
+				workflows, and RAG, alongside robust fullstack web and mobile applications. I design and
+				ship scalable solutions from React Native mobile experiences to server-side rendered Next.js
+				apps and microservices, with a focus on dependable AI behaviour, answers grounded in real
+				data, and smooth integration across platforms.
 			</p>
 			<p>
-				Throughout my career, I've had the privilege of contributing to a wide range of
-				environments, from dynamic startups to established corporations. I've led teams, mentored
-				junior developers, and provided strategic technical guidance, always with an eye toward
-				efficiency, maintainability, and user-centric design. You'll find my work touches on
-				everything from video streaming optimization and AI-driven content generation to
-				containerization and advanced backend architectures.
+				Throughout my career, I've contributed across startups and established companies. I've led
+				teams, mentored junior developers, and provided strategic technical guidance with a focus on
+				efficiency, maintainability, and user-centric design. My work spans intelligent document
+				processing, video streaming optimization, containerization, and advanced backend
+				architectures, as well as modern AI tooling like LangChain, LangGraph, and automation
+				platforms.
 			</p>
 			<p>
 				Outside of coding, I enjoy photography, playing video games, snowboarding, rock climbing and
