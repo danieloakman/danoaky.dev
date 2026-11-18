@@ -37,7 +37,12 @@ export const SKILLS = {
 	rust: {
 		name: 'Rust',
 		type: 'programming-language',
-		years: calcYears('2023')
+		years: calcYears('2023,2026-')
+	},
+	leptos: {
+		name: 'Leptos',
+		type: 'framework',
+		years: calcYears('2026-')
 	},
 	nim: {
 		name: 'Nim',
@@ -580,6 +585,16 @@ export const EDUCATION: Education[] = [
 ];
 
 export const PROJECTS: Project[] = [
+	{
+		name: 'Pokémon GO Damage Comparator',
+		description:
+			'A client-side web app (Rust → WASM via Leptos) to compare your Pokémon GO raid attackers at their exact levels and IVs. Supports unlimited side-by-side compare with eDPS, DPS, and TDO, plus weave, fast-only, and Party Power modes. Vendors the full PoGoAPI game catalog.',
+		date: new Date('2026-11-01'),
+		madeAt: 'Personal',
+		skills: selectSkills('rust', 'leptos', 'nix'),
+		image: null,
+		sourceUrl: 'https://github.com/danieloakman/pogo-damage-comparator'
+	},
 	{
 		name: 'ai-quiz',
 		description:
