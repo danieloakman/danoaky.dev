@@ -588,7 +588,7 @@ export const PROJECTS: Project[] = [
 	{
 		name: 'agent-telegram-bot',
 		description:
-			'A Rust notify/ask bridge for agents via Telegram: long-poll daemon, unix control socket, and CLI for fire-and-forget notices and blocking questions. Packaged as a Nix flake with a Home Manager module (extracted from my dotfiles).',
+			'A Rust notify/ask bridge for agents via Telegram: long-poll daemon, unix control socket, and CLI for fire-and-forget notices and blocking questions. Packaged as a Nix flake with a Home Manager module.',
 		date: new Date('2026-11-01'),
 		madeAt: 'Personal',
 		skills: selectSkills('rust', 'nix', 'linux', 'AI'),
@@ -620,7 +620,7 @@ export const PROJECTS: Project[] = [
 	{
 		name: 'Polyphasic Sleep Manager',
 		description:
-			'An iOS app written in React-Native to help manage a polyphasic sleep schedule with your own personal schedule. Integrates with your phone’s calendar to see where you can fit in naps during the day and how to best fit in your sleep schedule.',
+			'An iOS app written in React-Native to help manage a polyphasic sleep schedule with your own personal schedule. Integrates with your phone\'s calendar to see where you can fit in naps during the day and how to best fit in your sleep schedule.',
 		date: new Date('2025-04-01'),
 		madeAt: 'Personal',
 		skills: selectSkills('TS', 'reactNative', 'reactNativeReanimated', 'reactNativeSkia'),
