@@ -586,6 +586,17 @@ export const EDUCATION: Education[] = [
 
 export const PROJECTS: Project[] = [
 	{
+		name: 'agent-telegram-bot',
+		description:
+			'A Rust notify/ask bridge for agents via Telegram: long-poll daemon, unix control socket, and CLI for fire-and-forget notices and blocking questions. Packaged as a Nix flake with a Home Manager module (extracted from my dotfiles).',
+		date: new Date('2026-11-01'),
+		madeAt: 'Personal',
+		skills: selectSkills('rust', 'nix', 'linux', 'AI'),
+		image: null,
+		url: 'https://github.com/danieloakman/agent-telegram-bot',
+		selected: true
+	},
+	{
 		name: 'Pokémon GO Damage Comparator',
 		description:
 			'A client-side web app (Rust → WASM via Leptos) to compare your Pokémon GO raid attackers at their exact levels and IVs. Supports unlimited side-by-side compare with eDPS, DPS, and TDO, plus weave, fast-only, and Party Power modes. Vendors the full PoGoAPI game catalog.',
