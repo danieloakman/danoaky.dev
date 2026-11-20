@@ -44,6 +44,16 @@ export const SKILLS = {
 		type: 'framework',
 		years: calcYears('2026-')
 	},
+	gtk: {
+		name: 'GTK4',
+		type: 'framework',
+		years: calcYears('2026-')
+	},
+	ags: {
+		name: 'AGS / Astal',
+		type: 'framework',
+		years: calcYears('2026-')
+	},
 	nim: {
 		name: 'Nim',
 		type: 'programming-language',
@@ -586,14 +596,25 @@ export const EDUCATION: Education[] = [
 
 export const PROJECTS: Project[] = [
 	{
-		name: 'agent-telegram-bot',
+		name: 'telegram-bots',
 		description:
-			'A Rust notify/ask bridge for agents via Telegram: long-poll daemon, unix control socket, and CLI for fire-and-forget notices and blocking questions. Packaged as a Nix flake with a Home Manager module.',
+			'Nix-configured Telegram bots in Rust: a long-poll daemon plus a unix control socket per instance, so agents and services can send fire-and-forget notices or ask blocking questions and wait on a reply. The Home Manager module wires up multiple bot instances, each with its own slash commands backed by arbitrary scripts.',
 		date: new Date('2026-11-01'),
 		madeAt: 'Personal',
 		skills: selectSkills('rust', 'nix', 'linux', 'AI'),
 		image: null,
-		url: 'https://github.com/danieloakman/agent-telegram-bot',
+		url: 'https://github.com/danieloakman/telegram-bots',
+		selected: true
+	},
+	{
+		name: 'ags-desktop-shell',
+		description:
+			'A TypeScript/GTK4 desktop shell for Hyprland built on AGS/Astal. Provides a bar, control centre, app launcher, notifications, media controls and password-store search, shipped as a Nix flake with a Home Manager module.',
+		date: new Date('2026-11-01'),
+		madeAt: 'Personal',
+		skills: selectSkills('TS', 'ags', 'gtk', 'nix', 'linux'),
+		image: null,
+		url: 'https://github.com/danieloakman/ags-desktop-shell',
 		selected: true
 	},
 	{
@@ -620,7 +641,7 @@ export const PROJECTS: Project[] = [
 	{
 		name: 'Polyphasic Sleep Manager',
 		description:
-			'An iOS app written in React-Native to help manage a polyphasic sleep schedule with your own personal schedule. Integrates with your phone\'s calendar to see where you can fit in naps during the day and how to best fit in your sleep schedule.',
+			"An iOS app written in React-Native to help manage a polyphasic sleep schedule with your own personal schedule. Integrates with your phone's calendar to see where you can fit in naps during the day and how to best fit in your sleep schedule.",
 		date: new Date('2025-04-01'),
 		madeAt: 'Personal',
 		skills: selectSkills('TS', 'reactNative', 'reactNativeReanimated', 'reactNativeSkia'),
