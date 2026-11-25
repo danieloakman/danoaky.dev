@@ -33,15 +33,23 @@ Merging to main will trigger a deployment to Cloudflare Workers which pushes the
 
 ## Generating Resume
 
-The [resume.pdf](./static/resume.pdf) file is captured/generated using Playwright. Playwright looks at the _/resume_ route, which can't be accessed in production.
+Resume artifacts are written to [`static/resume.pdf`](./static/resume.pdf) and [`static/resume.docx`](./static/resume.docx).
 
-With the dev server already running (`bun dev`):
+- **PDF** — Playwright captures the `/resume` route (dev-only; not available in production). Requires the dev server.
+- **Word** — Built from the same TypeScript content via the `docx` package. No dev server needed.
 
 ```bash
-bun create-resume -w
+# PDF + Word (default). Start `bun dev` first for the PDF.
+bun create-resume
+
+# Word only (no Playwright / no dev server)
+bun create-resume -f docx
+
+# PDF only, watch for changes
+bun create-resume -f pdf -w
 ```
 
-Omit `-w` for a one-shot capture.
+Omit `-w` for a one-shot run. Dated copies are also written to `$TMPDIR` as `DJB_Resume_YYYY-MM-DD.{pdf,docx}`.
 
 ## Inspiration
 

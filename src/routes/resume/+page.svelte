@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { EDUCATION, EXPERIENCE, PROJECTS, SKILLS } from '$lib/assets/content';
+	import { EDUCATION, EXPERIENCE, PROJECTS, RESUME_META, SKILLS } from '$lib/assets/content';
 	import type { Experience, Skill } from '$lib/types';
 	import { formatStartEndDates } from '$lib/utils/dates';
 
@@ -71,29 +71,24 @@
 <div class="resume">
 	<section class="page col">
 		<header class="flex flex-col gap-2">
-			<a href="https://danoaky.dev" class="anchor"><h1>Daniel Brown</h1></a>
+			<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
+			<a href={RESUME_META.siteUrl} class="anchor"><h1>{RESUME_META.name}</h1></a>
 			<p class="text-[13px] leading-snug max-w-[55ch]">
-				Senior Software Engineer focused on production AI systems (LLM assistants, agentic
-				workflows, and RAG), alongside performant, scalable web and mobile experiences.
+				{RESUME_META.summary}
 			</p>
 			<p class="contact">
-				<a class="link" href="mailto:doakman94@gmail.com">doakman94@gmail.com</a>
+				<a class="link" href="mailto:{RESUME_META.email}">{RESUME_META.email}</a>
 				<span aria-hidden="true">·</span>
-				<a class="link" href="tel:0411032732">0411032732</a>
+				<a class="link" href={RESUME_META.phoneHref}>{RESUME_META.phone}</a>
+				{#each RESUME_META.links as { label, url } (url)}
+					<span aria-hidden="true">·</span>
+					<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
+					<a class="link" href={url}>{label}</a>
+				{/each}
 				<span aria-hidden="true">·</span>
-				<a class="link" href="https://danoaky.dev">danoaky.dev</a>
+				<span>{RESUME_META.location}</span>
 				<span aria-hidden="true">·</span>
-				<a class="link" href="https://github.com/danieloakman">github.com/danieloakman</a>
-				<span aria-hidden="true">·</span>
-				<a class="link" href="https://www.linkedin.com/in/daniel-brown-7676161a0/">
-					linkedin.com/in/daniel-brown-7676161a0/
-				</a>
-				<span aria-hidden="true">·</span>
-				<a class="link" href="https://www.npmjs.com/~danoaky">npmjs.com/~danoaky</a>
-				<span aria-hidden="true">·</span>
-				<span>Wollongong, NSW</span>
-				<span aria-hidden="true">·</span>
-				<span>Australian Citizen</span>
+				<span>{RESUME_META.citizenship}</span>
 			</p>
 		</header>
 
@@ -104,7 +99,7 @@
 	</section>
 
 	<section class="page col page-2">
-		<p class="page-label">Daniel Brown - page 2</p>
+		<p class="page-label">{RESUME_META.name} - page 2</p>
 
 		<div class="col gap-2">
 			<h2>Skills</h2>
@@ -174,19 +169,11 @@
 			<div class="beyond-grid">
 				<div>
 					<b>Volunteering</b>
-					<p class="leading-normal">
-						Active WIRES volunteer, certified for Rescue and Immediate Care (native wildlife) and
-						Identification and Treatment of wombat mange. Passionate about helping native wildlife,
-						providing education to the community and assisting with wider population conservation
-						projects.
-					</p>
+					<p class="leading-normal">{RESUME_META.volunteering}</p>
 				</div>
 				<div>
 					<b>Interests</b>
-					<p class="leading-normal">
-						Outside of coding, I enjoy photography, playing video games, snowboarding, rock climbing
-						and spending time with my wonderful wife and dog.
-					</p>
+					<p class="leading-normal">{RESUME_META.interests}</p>
 				</div>
 			</div>
 		</div>

@@ -50,6 +50,26 @@ export interface Project {
 	selected?: boolean;
 }
 
+export interface ResumeLink {
+	label: string;
+	url: string;
+}
+
+/** Header / contact / beyond-work copy shared by PDF HTML and Word export. */
+export interface ResumeMeta {
+	name: string;
+	siteUrl: string;
+	summary: string;
+	email: string;
+	phone: string;
+	phoneHref: string;
+	links: ResumeLink[];
+	location: string;
+	citizenship: string;
+	volunteering: string;
+	interests: string;
+}
+
 // export interface Interest {
 //   type: 'hobby' | 'sport' | 'other';
 //   name: string;
