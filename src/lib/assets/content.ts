@@ -1,7 +1,32 @@
 import { pick } from 'moderndash';
 
-import type { Education, Experience, Project, Skill } from '$lib/types';
-import { calcYears } from '$lib/utils/dates';
+import type { Education, Experience, Project, ResumeMeta, Skill } from '../types';
+import { calcYears } from '../utils/dates';
+
+export const RESUME_META: ResumeMeta = {
+	name: 'Daniel Brown',
+	siteUrl: 'https://danoaky.dev',
+	summary:
+		'Senior Software Engineer focused on production AI systems (LLM assistants, agentic workflows, and RAG), alongside performant, scalable web and mobile experiences.',
+	email: 'doakman94@gmail.com',
+	phone: '0411032732',
+	phoneHref: 'tel:0411032732',
+	links: [
+		{ label: 'danoaky.dev', url: 'https://danoaky.dev' },
+		{ label: 'github.com/danieloakman', url: 'https://github.com/danieloakman' },
+		{
+			label: 'linkedin.com/in/daniel-brown-7676161a0/',
+			url: 'https://www.linkedin.com/in/daniel-brown-7676161a0/'
+		},
+		{ label: 'npmjs.com/~danoaky', url: 'https://www.npmjs.com/~danoaky' }
+	],
+	location: 'Wollongong, NSW',
+	citizenship: 'Australian Citizen',
+	volunteering:
+		'Active WIRES volunteer, certified for Rescue and Immediate Care (native wildlife) and Identification and Treatment of wombat mange. Passionate about helping native wildlife, providing education to the community and assisting with wider population conservation projects.',
+	interests:
+		'Outside of coding, I enjoy photography, playing video games, snowboarding, rock climbing and spending time with my wonderful wife and dog.'
+};
 
 export const SKILLS = {
 	JS: {
