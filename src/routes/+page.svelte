@@ -38,7 +38,7 @@
 				spending time with my wonderful wife and dog.
 			</p>
 
-			<p class="flex flex-wrap gap-x-4 gap-y-1 text-xl">
+			<p class="flex flex-col gap-y-1 text-xl">
 				<Link href="./resume.pdf" intent="internal" target="_blank">Resume (PDF)</Link>
 				<Link href="./resume.docx" intent="internal" target="_blank">Resume (Word)</Link>
 			</p>
