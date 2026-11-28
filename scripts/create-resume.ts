@@ -1,4 +1,5 @@
 #! bun
+import { RESUME_VARIANTS, type ResumeVariant } from '../src/lib/assets/resume-content';
 import { Dayjs, Result, sh } from '@danoaky/js-utils';
 import chokidar from 'chokidar';
 import { readFileSync, writeFileSync } from 'fs';
@@ -10,6 +11,16 @@ import path from 'path';
 import { writeResumeDocx } from './resume-docx';
 
 type ResumeFormat = 'pdf' | 'docx' | 'all';
+type VariantFlag = ResumeVariant | 'all';
+
+/** The ai variant keeps the plain name; others get a `-<variant>` suffix. */
+const variantPath = (file: string, variant: ResumeVariant) =>
+	variant === 'ai'
+		? file
+		: path.join(
+				path.dirname(file),
+				`${path.basename(file, path.extname(file))}-${variant}${path.extname(file)}`
+			);
 
 const setDataMode = (mode: 'light' | 'dark') => {
 	const appHtmlPath = path.join(import.meta.dir, '../src/app.html');
@@ -17,29 +28,37 @@ const setDataMode = (mode: 'light' | 'dark') => {
 	writeFileSync(appHtmlPath, text.replace(/data-mode="(dark|light)"/, `data-mode="${mode}"`));
 };
 
-const datedCopyName = (ext: 'pdf' | 'docx') => {
+const datedCopyName = (ext: 'pdf' | 'docx', variant: ResumeVariant) => {
 	const date = Dayjs().local().format('YYYY-MM-DD');
-	return path.join(tmpdir(), `DJB_Resume_${date}.${ext}`);
+	const suffix = variant === 'ai' ? '' : `_${variant}`;
+	return path.join(tmpdir(), `DJB_Resume${suffix}_${date}.${ext}`);
 };
 
-async function createPdf(output: string) {
-	await sh(`bun playwright pdf --paper-format A4 "http://localhost:5173/resume" "${output}"`).then(
-		Result.unwrap
-	);
-	await cp(output, datedCopyName('pdf'));
+async function createPdf(output: string, variant: ResumeVariant) {
+	await sh(
+		`bun playwright pdf --paper-format A4 "http://localhost:5173/resume?variant=${variant}" "${output}"`
+	).then(Result.unwrap);
+	await cp(output, datedCopyName('pdf', variant));
 }
 
-async function createDocx(output: string) {
-	await writeResumeDocx(output);
-	await cp(output, datedCopyName('docx'));
+async function createDocx(output: string, variant: ResumeVariant) {
+	await writeResumeDocx(output, variant);
+	await cp(output, datedCopyName('docx', variant));
 }
 
-async function createResume(format: ResumeFormat, pdfOutput: string, docxOutput: string) {
-	if (format === 'pdf' || format === 'all') {
-		await createPdf(pdfOutput);
-	}
-	if (format === 'docx' || format === 'all') {
-		await createDocx(docxOutput);
+async function createResume(
+	format: ResumeFormat,
+	variants: ResumeVariant[],
+	pdfOutput: string,
+	docxOutput: string
+) {
+	for (const variant of variants) {
+		if (format === 'pdf' || format === 'all') {
+			await createPdf(variantPath(pdfOutput, variant), variant);
+		}
+		if (format === 'docx' || format === 'all') {
+			await createDocx(variantPath(docxOutput, variant), variant);
+		}
 	}
 }
 
@@ -54,7 +73,9 @@ if (import.meta.main) {
 
     Options
       --format, -f  Output format: pdf | docx | all (default: all)
-      --output, -o  Output path (defaults by format; with all, sets PDF path and derives .docx beside it)
+      --variant, -v Variant: ai | app | all (default: all)
+      --output, -o  Output path for the ai variant (defaults by format; with all, sets PDF path and
+                    derives .docx beside it). The app variant gets an -app suffix.
       --watch, -w   Watch for changes and re-render the resume
   `,
 		{
@@ -63,6 +84,11 @@ if (import.meta.main) {
 				format: {
 					type: 'string',
 					shortFlag: 'f',
+					default: 'all'
+				},
+				variant: {
+					type: 'string',
+					shortFlag: 'v',
 					default: 'all'
 				},
 				output: {
@@ -83,6 +109,15 @@ if (import.meta.main) {
 		console.error(`Invalid --format "${cli.flags.format}". Use pdf, docx, or all.`);
 		process.exit(1);
 	}
+
+	const variantFlag = cli.flags.variant as VariantFlag;
+	if (variantFlag !== 'all' && !RESUME_VARIANTS.includes(variantFlag)) {
+		console.error(
+			`Invalid --variant "${cli.flags.variant}". Use ${RESUME_VARIANTS.join(', ')}, or all.`
+		);
+		process.exit(1);
+	}
+	const variants = variantFlag === 'all' ? [...RESUME_VARIANTS] : [variantFlag];
 
 	let pdfOutput = defaultPdf;
 	let docxOutput = defaultDocx;
@@ -109,10 +144,13 @@ if (import.meta.main) {
 		});
 	}
 
-	const run = () => createResume(format, pdfOutput, docxOutput);
+	const run = () => createResume(format, variants, pdfOutput, docxOutput);
 
 	if (cli.flags.watch) {
-		const watchPaths = [path.join(import.meta.dir, '../src/lib/assets/content.ts')];
+		const watchPaths = [
+			path.join(import.meta.dir, '../src/lib/assets/content.ts'),
+			path.join(import.meta.dir, '../src/lib/assets/resume-content.ts')
+		];
 		if (needsPdf) {
 			watchPaths.push(
 				path.join(import.meta.dir, '../src/routes/resume/+page.svelte'),

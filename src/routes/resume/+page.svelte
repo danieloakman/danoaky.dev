@@ -1,23 +1,26 @@
 <script lang="ts">
-	import { EDUCATION, EXPERIENCE, PROJECTS, RESUME_META, SKILLS } from '$lib/assets/content';
-	import type { Experience, Skill } from '$lib/types';
+	import { EDUCATION, RESUME_META } from '$lib/assets/content';
+	import {
+		ABOUT_ME,
+		EDUCATION_TODO,
+		EXIT_STATEMENT,
+		SUMMARY,
+		jobsFor,
+		projectsFor,
+		skillTiersFor
+	} from '$lib/assets/resume-content';
+	import type { ResumeJobView } from '$lib/assets/resume-content';
 	import { formatStartEndDates } from '$lib/utils/dates';
 
-	const {
-		'programming-language': languages,
-		framework: frameworks,
-		library: libraries,
-		tool: tools,
-		platform: platforms
-	} = Object.values(SKILLS).reduce(
-		(acc, skill) => {
-			acc[skill.type] = [...(acc[skill.type] ?? []), skill];
-			return acc;
-		},
-		{} as Record<Skill['type'], Skill[]>
-	);
+	import type { PageProps } from './$types';
 
-	const skillByYears = (a: Skill, b: Skill) => b.years - a.years;
+	let { data }: PageProps = $props();
+	const variant = $derived(data.variant);
+	const jobs = $derived(jobsFor(variant));
+	const projects = $derived(projectsFor(variant));
+
+	/** Jobs rendered on page 1, the rest flow onto page 2. */
+	const PAGE_1_JOBS = 2;
 </script>
 
 {#snippet subSection({ title, content, href }: { title?: string; content: string; href?: string })}
@@ -32,59 +35,47 @@
 	</div>
 {/snippet}
 
-{#snippet experienceBlock(items: Experience[])}
-	<div class="experience-grid">
-		{#each items as { company, roles, description, url } (company + (roles[0]?.title ?? ''))}
-			{@const rolesCopy = roles.slice()}
-			{@const lastRole = rolesCopy.shift()}
-
-			<div class="experience-cell flex flex-col gap-1 min-w-0">
-				<div class="flex flex-col">
-					{#if lastRole}
-						{@const { start, end } = formatStartEndDates(lastRole.start, lastRole.end)}
-						<h3 class="flex flex-wrap gap-x-1 items-end text-[13px]">
-							{lastRole.title} -
-							<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
-							<a class="link" href={url}><b class="font-semibold">{company}</b></a>
-							<span class="text-[12px] opacity-60">{start} - {end}</span>
-						</h3>
-					{/if}
-					{#each rolesCopy as role (role.title)}
-						{@const { start, end } = formatStartEndDates(role.start, role.end)}
-						<h3 class="flex flex-wrap gap-x-2 items-end text-[13px]">
-							{role.title}
-							<span class="text-[12px] opacity-60">{start} - {end}</span>
-						</h3>
-					{/each}
-				</div>
-
-				<ul class="pl-4 flex flex-col list-disc text-[12px] leading-snug">
-					{#each description as item (item)}
-						<li>{item}</li>
-					{/each}
-				</ul>
+{#snippet job({ company, url, location, about, stints }: ResumeJobView)}
+	<div class="job flex min-w-0 flex-col gap-1">
+		<h3 class="flex flex-wrap items-baseline gap-x-2 text-[13px]">
+			<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
+			<a href={url}><b class="font-semibold">{company}</b></a>
+			<span class="text-[11px] opacity-60">{location}</span>
+		</h3>
+		<p class="leading-snug italic opacity-80">{about}</p>
+		{#each stints as { roles, bullets } (roles[0]?.title)}
+			<div class="flex flex-col">
+				{#each roles as { title, start, end, note } (title)}
+					{@const dates = formatStartEndDates(start, end)}
+					<div class="role">
+						<span class="font-semibold">{title}{note ? ` (${note})` : ''}</span>
+						<span class="text-[11px] whitespace-nowrap opacity-60">{dates.start} - {dates.end}</span
+						>
+					</div>
+				{/each}
 			</div>
+			<ul class="list-disc pl-4 leading-snug">
+				{#each bullets as item (item)}
+					<li>{item}</li>
+				{/each}
+			</ul>
 		{/each}
 	</div>
 {/snippet}
 
-<div class="resume">
+<div class="resume" data-variant={variant}>
 	<section class="page col">
-		<header class="flex flex-col gap-2">
+		<p class="page-label">{RESUME_META.name} - page 1</p>
+
+		<header class="col gap-2">
 			<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
 			<a href={RESUME_META.siteUrl} class="anchor"><h1>{RESUME_META.name}</h1></a>
-			<p class="text-[13px] leading-snug max-w-[55ch]">
-				{RESUME_META.summary}
-			</p>
+			<p class="leading-snug">{SUMMARY[variant]}</p>
 			<p class="contact">
-				<a class="link" href="mailto:{RESUME_META.email}">{RESUME_META.email}</a>
+				<a href="mailto:{RESUME_META.email}">{RESUME_META.email}</a>
 				<span aria-hidden="true">·</span>
-				<a class="link" href={RESUME_META.phoneHref}>{RESUME_META.phone}</a>
-				{#each RESUME_META.links as { label, url } (url)}
-					<span aria-hidden="true">·</span>
-					<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
-					<a class="link" href={url}>{label}</a>
-				{/each}
+				<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
+				<a href={RESUME_META.phoneHref}>{RESUME_META.phone}</a>
 				<span aria-hidden="true">·</span>
 				<span>{RESUME_META.location}</span>
 				<span aria-hidden="true">·</span>
@@ -93,71 +84,46 @@
 		</header>
 
 		<div class="col gap-2">
+			<h2>Skills</h2>
+			{#each skillTiersFor(variant) as { title, content } (title)}
+				{@render subSection({ title, content })}
+			{/each}
+		</div>
+
+		<div class="col gap-2">
 			<h2><a href="https://danoaky.dev#EXPERIENCE">Experience</a></h2>
-			{@render experienceBlock(EXPERIENCE)}
+			{#each jobs.slice(0, PAGE_1_JOBS) as view (view.company)}
+				{@render job(view)}
+			{/each}
 		</div>
 	</section>
 
-	<section class="page col page-2">
+	<section class="page col">
 		<p class="page-label">{RESUME_META.name} - page 2</p>
 
 		<div class="col gap-2">
-			<h2>Skills</h2>
-			<div class="skills-grid">
-				{@render subSection({
-					title: 'Strongest languages',
-					content: languages
-						.slice(0, 4)
-						.map(({ name, years }) => `${years} years in ${name}`)
-						.join(', ')
-				})}
-				{@render subSection({
-					title: 'Other Known Languages',
-					content: languages
-						.slice(4)
-						.sort(skillByYears)
-						.map(({ name }) => name)
-						.join(', ')
-				})}
-				{@render subSection({
-					title: 'Libraries & Frameworks',
-					content: libraries
-						.concat(frameworks)
-						.sort(skillByYears)
-						.filter(({ years }) => years > 2)
-						.map(({ name }) => name)
-						.join(', ')
-				})}
-				{@render subSection({
-					title: 'Tools & Platforms',
-					content: platforms
-						.concat(tools)
-						.sort(skillByYears)
-						.filter(({ years }) => years > 2)
-						.map(({ name }) => name)
-						.join(', ')
-				})}
-			</div>
+			{#each jobs.slice(PAGE_1_JOBS) as view (view.company)}
+				{@render job(view)}
+			{/each}
 		</div>
+	</section>
 
-		<div class="col gap-2">
-			<h2>Education</h2>
-			<div class="education-grid">
-				{#each EDUCATION as { institution, award, end } (institution)}
-					{@render subSection({
-						title: institution,
-						content: `${award}${end ? ` - ${end.getFullYear()}` : ''}`
-					})}
-				{/each}
-			</div>
-		</div>
+	<section class="page col">
+		<p class="page-label">{RESUME_META.name} - page 3</p>
 
 		<div class="col gap-2">
 			<h2>Selected Projects</h2>
-			{#each PROJECTS.filter(({ selected }) => selected).slice(0, 4) as { name, madeAt, description, url } (name)}
+			<p class="contact">
+				{#each RESUME_META.links as { label, url }, i (url)}
+					{#if i > 0}<span aria-hidden="true">·</span>{/if}
+					<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
+					<a class="link" href={url}>{label}</a>
+				{/each}
+			</p>
+			{#each projects as { name, madeAt, summary, impact, url } (name)}
 				{@render subSection({
 					title: `${name}${madeAt === 'Personal' ? '' : ` - ${madeAt}`}`,
-					content: description,
+					content: `${summary} ${impact}`,
 					href: url
 				})}
 			{/each}
@@ -165,20 +131,31 @@
 		</div>
 
 		<div class="col gap-2">
-			<h2>Beyond work</h2>
-			<div class="beyond-grid">
-				<div>
-					<b>Volunteering</b>
-					<p class="leading-normal">{RESUME_META.volunteering}</p>
-				</div>
-				<div>
-					<b>Interests</b>
-					<p class="leading-normal">{RESUME_META.interests}</p>
-				</div>
-			</div>
+			<h2>Education & Professional Development</h2>
+			{#each EDUCATION as { institution, award, end } (institution)}
+				{@render subSection({
+					title: institution,
+					content: `${award}${end ? ` - ${end.getFullYear()}` : ''}`
+				})}
+			{/each}
+			<p class="leading-normal">
+				{EDUCATION_TODO}
+			</p>
 		</div>
 
-		<footer class="absolute bottom-1 right-1 text-[11px]">
+		<div class="col gap-2">
+			<h2>Working with people</h2>
+			{#each ABOUT_ME as { title, content } (title)}
+				{@render subSection({ title, content })}
+			{/each}
+		</div>
+
+		<div class="col gap-2">
+			<h2>Next step</h2>
+			<p class="leading-normal">{EXIT_STATEMENT}</p>
+		</div>
+
+		<footer class="absolute right-1 bottom-1 text-[11px]">
 			<a
 				class="link"
 				href="https://github.com/danieloakman/danoaky.dev?tab=readme-ov-file#generating-resume"
@@ -205,10 +182,6 @@
 
 	.col {
 		@apply flex flex-col gap-3.5;
-	}
-
-	.page-2 {
-		@apply gap-8;
 	}
 
 	.page-label {
@@ -250,21 +223,11 @@
 		@apply text-neutral-400 select-none;
 	}
 
-	.skills-grid,
-	.experience-grid,
-	.beyond-grid {
-		@apply grid grid-cols-2 gap-x-4 gap-y-3;
+	.job {
+		@apply border-b border-neutral-300 pb-2;
 	}
 
-	.experience-cell {
-		@apply border-b border-neutral-300 pb-1.5;
-	}
-
-	.experience-cell:nth-child(even) {
-		@apply border-primary-200 border-l pl-2.5;
-	}
-
-	.education-grid {
-		@apply grid grid-cols-3 gap-x-4;
+	.role {
+		@apply flex items-baseline justify-between gap-x-3;
 	}
 </style>

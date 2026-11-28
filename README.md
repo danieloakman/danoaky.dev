@@ -33,14 +33,21 @@ Merging to main will trigger a deployment to Cloudflare Workers which pushes the
 
 ## Generating Resume
 
-Resume artifacts are written to [`static/resume.pdf`](./static/resume.pdf) and [`static/resume.docx`](./static/resume.docx).
+Two versions are produced, following career coach feedback:
 
-- **PDF** — Playwright captures the `/resume` route (dev-only; not available in production). Requires the dev server.
+- **ai** (default) leads with production AI work. Written to `static/resume.{pdf,docx}`.
+- **app** leads with web and mobile app work. Written to `static/resume-app.{pdf,docx}`.
+
+- **PDF** — Playwright captures the `/resume` route (dev-only; not available in production). Requires the dev server. Pick a version with `/resume?variant=ai` or `/resume?variant=app`.
 - **Word** — Built from the same TypeScript content via the `docx` package. No dev server needed.
+- Copy lives in `src/lib/assets/resume-content.ts`. Search for `TODO(daniel)` to find facts still missing.
 
 ```bash
-# PDF + Word (default). Start `bun dev` first for the PDF.
+# PDF + Word for both versions. Start `bun dev` first for the PDF.
 bun create-resume
+
+# One version only
+bun create-resume -v app
 
 # Word only (no Playwright / no dev server)
 bun create-resume -f docx
