@@ -1,25 +1,33 @@
+import { EDUCATION, RESUME_META } from '../src/lib/assets/content';
+import {
+	ABOUT_ME,
+	EDUCATION_TODO,
+	EXIT_STATEMENT,
+	type ResumeJobView,
+	type ResumeVariant,
+	SUMMARY,
+	jobsFor,
+	projectsFor,
+	skillTiersFor
+} from '../src/lib/assets/resume-content';
+import { formatStartEndDates } from '../src/lib/utils/dates';
 import {
 	AlignmentType,
 	BorderStyle,
 	Document,
 	ExternalHyperlink,
 	HeadingLevel,
+	type IParagraphOptions,
 	LevelFormat,
 	Packer,
 	Paragraph,
-	TextRun,
-	type IParagraphOptions
+	TabStopType,
+	TextRun
 } from 'docx';
 import { writeFile } from 'fs/promises';
 
-import { EDUCATION, EXPERIENCE, PROJECTS, RESUME_META, SKILLS } from '../src/lib/assets/content';
-import type { Experience, Skill } from '../src/lib/types';
-import { formatStartEndDates } from '../src/lib/utils/dates';
-
 const ACCENT = 'B45309';
 const MUTED = '6B7280';
-
-const skillByYears = (a: Skill, b: Skill) => b.years - a.years;
 
 function linkRun(text: string, url: string) {
 	return new ExternalHyperlink({
@@ -55,116 +63,66 @@ function bullet(text: string) {
 	});
 }
 
-function skillGroups() {
-	const {
-		'programming-language': languages = [],
-		framework: frameworks = [],
-		library: libraries = [],
-		tool: tools = [],
-		platform: platforms = []
-	} = Object.values(SKILLS).reduce(
-		(acc, skill) => {
-			acc[skill.type] = [...(acc[skill.type] ?? []), skill];
-			return acc;
-		},
-		{} as Record<Skill['type'], Skill[]>
-	);
-
-	return [
-		{
-			title: 'Strongest languages',
-			content: languages
-				.slice(0, 4)
-				.map(({ name, years }) => `${years} years in ${name}`)
-				.join(', ')
-		},
-		{
-			title: 'Other Known Languages',
-			content: languages
-				.slice(4)
-				.sort(skillByYears)
-				.map(({ name }) => name)
-				.join(', ')
-		},
-		{
-			title: 'Libraries & Frameworks',
-			content: libraries
-				.concat(frameworks)
-				.sort(skillByYears)
-				.filter(({ years }) => years > 2)
-				.map(({ name }) => name)
-				.join(', ')
-		},
-		{
-			title: 'Tools & Platforms',
-			content: platforms
-				.concat(tools)
-				.sort(skillByYears)
-				.filter(({ years }) => years > 2)
-				.map(({ name }) => name)
-				.join(', ')
-		}
-	];
+function subHeading(text: string) {
+	return bodyParagraph({
+		spacing: { before: 60, after: 20 },
+		children: [new TextRun({ text, bold: true, size: 20 })]
+	});
 }
 
-function experienceParagraphs(items: Experience[]) {
+/** Right edge of the text area (A4 width 11906 minus 720 margins either side). */
+const RIGHT_TAB = 10466;
+
+function experienceParagraphs(items: ResumeJobView[]) {
 	const paragraphs: Paragraph[] = [];
 
-	for (const { company, roles, description, url } of items) {
-		const rolesCopy = roles.slice();
-		const lastRole = rolesCopy.shift();
+	for (const { company, url, location, about, stints } of items) {
+		paragraphs.push(
+			bodyParagraph({
+				spacing: { before: 160, after: 20 },
+				keepNext: true,
+				children: [
+					linkRun(company, url),
+					new TextRun({ text: `  ${location}`, color: MUTED, size: 20 })
+				]
+			}),
+			bodyParagraph({
+				keepNext: true,
+				children: [new TextRun({ text: about, italics: true, size: 20 })]
+			})
+		);
 
-		if (lastRole) {
-			const { start, end } = formatStartEndDates(lastRole.start, lastRole.end);
-			paragraphs.push(
-				bodyParagraph({
-					spacing: { before: 120, after: 40 },
-					children: [
-						new TextRun({ text: `${lastRole.title} - `, bold: true, size: 22 }),
-						linkRun(company, url),
-						new TextRun({ text: `  ${start} - ${end}`, color: MUTED, size: 20 })
-					]
-				})
-			);
-		}
-
-		for (const role of rolesCopy) {
-			const { start, end } = formatStartEndDates(role.start, role.end);
-			paragraphs.push(
-				bodyParagraph({
-					spacing: { after: 40 },
-					children: [
-						new TextRun({ text: role.title, bold: true, size: 22 }),
-						new TextRun({ text: `  ${start} - ${end}`, color: MUTED, size: 20 })
-					]
-				})
-			);
-		}
-
-		for (const item of description) {
-			paragraphs.push(bullet(item));
+		for (const { roles, bullets } of stints) {
+			for (const { title, start, end, note } of roles) {
+				const dates = formatStartEndDates(start, end);
+				paragraphs.push(
+					bodyParagraph({
+						spacing: { before: 40, after: 20 },
+						keepNext: true,
+						tabStops: [{ type: TabStopType.RIGHT, position: RIGHT_TAB }],
+						children: [
+							new TextRun({ text: `${title}${note ? ` (${note})` : ''}`, bold: true, size: 22 }),
+							new TextRun({ text: `\t${dates.start} - ${dates.end}`, color: MUTED, size: 20 })
+						]
+					})
+				);
+			}
+			paragraphs.push(...bullets.map(bullet));
 		}
 	}
 
 	return paragraphs;
 }
 
-export function buildResumeDocument() {
+export function buildResumeDocument(variant: ResumeVariant = 'ai') {
 	const generatedOn = new Date().toLocaleDateString('en-AU', { timeZone: 'Australia/Sydney' });
-	const selectedProjects = PROJECTS.filter(({ selected }) => selected).slice(0, 4);
+	const selectedProjects = projectsFor(variant);
 
 	const contactChildren = [
 		linkRun(RESUME_META.email, `mailto:${RESUME_META.email}`),
 		new TextRun({ text: ' · ', color: MUTED, size: 20 }),
 		linkRun(RESUME_META.phone, RESUME_META.phoneHref)
 	];
-
-	for (const { label, url } of RESUME_META.links) {
-		contactChildren.push(
-			new TextRun({ text: ' · ', color: MUTED, size: 20 }),
-			linkRun(label, url)
-		);
-	}
 
 	contactChildren.push(
 		new TextRun({ text: ' · ', color: MUTED, size: 20 }),
@@ -194,25 +152,45 @@ export function buildResumeDocument() {
 		}),
 		bodyParagraph({
 			spacing: { after: 80 },
-			children: [new TextRun({ text: RESUME_META.summary, size: 22 })]
+			children: [new TextRun({ text: SUMMARY[variant], size: 22 })]
 		}),
 		bodyParagraph({
 			spacing: { after: 160 },
 			children: contactChildren
 		}),
-		heading('Experience'),
-		...experienceParagraphs(EXPERIENCE),
 		heading('Skills'),
-		...skillGroups().flatMap(({ title, content }) => [
-			bodyParagraph({
-				spacing: { before: 80, after: 20 },
-				children: [new TextRun({ text: title, bold: true, size: 20 })]
-			}),
-			bodyParagraph({
-				children: [new TextRun({ text: content, size: 20 })]
-			})
+		...skillTiersFor(variant).flatMap(({ title, content }) => [
+			subHeading(title),
+			bodyParagraph({ children: [new TextRun({ text: content, size: 20 })] })
 		]),
-		heading('Education'),
+		heading('Experience'),
+		...experienceParagraphs(jobsFor(variant)),
+		heading('Selected Projects'),
+		bodyParagraph({
+			children: RESUME_META.links.flatMap(({ label, url }, i) => [
+				...(i > 0 ? [new TextRun({ text: ' · ', color: MUTED, size: 20 })] : []),
+				linkRun(label, url)
+			])
+		}),
+		...selectedProjects.flatMap(({ name, madeAt, summary, impact, url }) => {
+			const title = `${name}${madeAt === 'Personal' ? '' : ` - ${madeAt}`}`;
+			return [
+				bodyParagraph({
+					spacing: { before: 80, after: 20 },
+					children: url
+						? [linkRun(title, url)]
+						: [new TextRun({ text: title, bold: true, size: 20 })]
+				}),
+				bodyParagraph({
+					children: [new TextRun({ text: `${summary} ${impact}`, size: 20 })]
+				})
+			];
+		}),
+		bodyParagraph({
+			spacing: { before: 60, after: 80 },
+			children: [linkRun('View all my projects', 'https://danoaky.dev/projects')]
+		}),
+		heading('Education & Professional Development'),
 		...EDUCATION.map(({ institution, award, end }) =>
 			bodyParagraph({
 				spacing: { before: 60, after: 40 },
@@ -225,39 +203,15 @@ export function buildResumeDocument() {
 				]
 			})
 		),
-		heading('Selected Projects'),
-		...selectedProjects.flatMap(({ name, madeAt, description, url }) => {
-			const title = `${name}${madeAt === 'Personal' ? '' : ` - ${madeAt}`}`;
-			return [
-				bodyParagraph({
-					spacing: { before: 80, after: 20 },
-					children: url
-						? [linkRun(title, url)]
-						: [new TextRun({ text: title, bold: true, size: 20 })]
-				}),
-				bodyParagraph({
-					children: [new TextRun({ text: description, size: 20 })]
-				})
-			];
-		}),
+		bodyParagraph({ children: [new TextRun({ text: EDUCATION_TODO, size: 20 })] }),
+		heading('Working with people'),
+		...ABOUT_ME.flatMap(({ title, content }) => [
+			subHeading(title),
+			bodyParagraph({ children: [new TextRun({ text: content, size: 20 })] })
+		]),
+		heading('Next step'),
 		bodyParagraph({
-			spacing: { before: 60, after: 80 },
-			children: [linkRun('View all my projects', 'https://danoaky.dev/projects')]
-		}),
-		heading('Beyond work', { pageBreakBefore: true }),
-		bodyParagraph({
-			spacing: { before: 80, after: 20 },
-			children: [new TextRun({ text: 'Volunteering', bold: true, size: 20 })]
-		}),
-		bodyParagraph({
-			children: [new TextRun({ text: RESUME_META.volunteering, size: 20 })]
-		}),
-		bodyParagraph({
-			spacing: { before: 80, after: 20 },
-			children: [new TextRun({ text: 'Interests', bold: true, size: 20 })]
-		}),
-		bodyParagraph({
-			children: [new TextRun({ text: RESUME_META.interests, size: 20 })]
+			children: [new TextRun({ text: EXIT_STATEMENT, size: 20 })]
 		}),
 		new Paragraph({
 			alignment: AlignmentType.RIGHT,
@@ -274,7 +228,7 @@ export function buildResumeDocument() {
 	return new Document({
 		creator: RESUME_META.name,
 		title: `${RESUME_META.name} — Resume`,
-		description: RESUME_META.summary,
+		description: SUMMARY[variant],
 		styles: {
 			default: {
 				document: {
@@ -315,7 +269,7 @@ export function buildResumeDocument() {
 	});
 }
 
-export async function writeResumeDocx(output: string) {
-	const buffer = await Packer.toBuffer(buildResumeDocument());
+export async function writeResumeDocx(output: string, variant: ResumeVariant = 'ai') {
+	const buffer = await Packer.toBuffer(buildResumeDocument(variant));
 	await writeFile(output, buffer);
 }

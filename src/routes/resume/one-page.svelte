@@ -55,7 +55,8 @@
 							<h3 class="flex gap-1 items-end text-[11px]">
 								{lastRole.title} -
 								<!-- eslint-disable-next-line svelte/no-navigation-without-resolve -->
-								<a class="link" href={url} target="_blank"><b class="font-semibold">{company}</b></a>
+								<a class="link" href={url} target="_blank"><b class="font-semibold">{company}</b></a
+								>
 								<p class="text-xxs opacity-60">{start} - {end}</p>
 							</h3>
 						{/if}

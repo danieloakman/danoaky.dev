@@ -1,7 +1,6 @@
-import { pick } from 'moderndash';
-
 import type { Education, Experience, Project, ResumeMeta, Skill } from '../types';
 import { calcYears } from '../utils/dates';
+import { pick } from 'moderndash';
 
 export const RESUME_META: ResumeMeta = {
 	name: 'Daniel Brown',
