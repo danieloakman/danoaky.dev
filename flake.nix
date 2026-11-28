@@ -25,6 +25,7 @@
           NIX_BUILD_SHELL = "${pkgs.zsh}/bin/zsh";
           packages = with pkgs; [
             bun
+            wrangler
             pkgs-playwright.playwright-driver
           ];
           shellHook = ''
